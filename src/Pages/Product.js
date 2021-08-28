@@ -1,5 +1,6 @@
-import { useState } from "react";
-import Items from "./Items";
+import React, { Suspense, useState } from "react";
+import classes from "./Product.module.css";
+const Items = React.lazy(() => import("./Items"));
 
 const Product = () => {
   const items = [
@@ -226,6 +227,7 @@ const Product = () => {
           </div>
           <div class="col-md-9">
             <div class="row mb-5">
+              <Suspense fallback={<div className={classes.loading}></div>}>
               {selectedItems.map((item) => (
                 <Items
                   image={item.image}
@@ -235,6 +237,7 @@ const Product = () => {
                   id={item.id}
                 />
               ))}
+              </Suspense>
             </div>
           </div>
         </div>

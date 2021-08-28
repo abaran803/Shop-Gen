@@ -1,7 +1,12 @@
-import { Fragment } from "react";
-import Features from "./MainPageContents/Features";
-import LatestProducts from "./MainPageContents/LatestProducts";
-import ShopByCategory from "./MainPageContents/ShopByCategory";
+import classes from "./MainContent.module.css";
+import React, { Fragment, Suspense } from "react";
+const Features = React.lazy(() => import("./MainPageContents/Features"));
+const LatestProducts = React.lazy(() =>
+  import("./MainPageContents/LatestProducts")
+);
+const ShopByCategory = React.lazy(() =>
+  import("./MainPageContents/ShopByCategory")
+);
 
 const MainContent = () => {
   const categoryItems = [
@@ -142,42 +147,44 @@ const MainContent = () => {
           </a>
         </div>
       </div>
-      <div className="shop_by_category py-5 my-5" id="shop_by_category">
-        <div className="container-fluid">
-          <div className="section_title text-center mb-5">
-            <h1 className="text-capitalize">Shop By category</h1>
-          </div>
-          <div className="row">
-            {categoryItems.map((item) => (
-              <ShopByCategory image={item.image} />
-            ))}
-          </div>
-        </div>
-      </div>
-      <section className="products py-5 my-5 bg-light" id="products">
-        <div className="container">
-          <div className="section_title text-center mb-5">
-            <h1 className="text-capitalize">Latest Products</h1>
-          </div>
-          <div className="row mb-5">
-            {latestProducts.map((item) => (
-              <LatestProducts item={item} />
-            ))}
+      <Suspense fallback={<div className={classes.loading}></div>}>
+        <div className="shop_by_category py-5 my-5" id="shop_by_category">
+          <div className="container-fluid">
+            <div className="section_title text-center mb-5">
+              <h1 className="text-capitalize">Shop By category</h1>
+            </div>
+            <div className="row">
+              {categoryItems.map((item) => (
+                <ShopByCategory image={item.image} />
+              ))}
+            </div>
           </div>
         </div>
-      </section>
-      <section className="feature py-5 mt-5" id="feature">
-        <div className="container">
-          <div className="section_title text-center mb-5">
-            <h1 className="text-capitalize">Our Features</h1>
+        <section className="products py-5 my-5 bg-light" id="products">
+          <div className="container">
+            <div className="section_title text-center mb-5">
+              <h1 className="text-capitalize">Latest Products</h1>
+            </div>
+            <div className="row mb-5">
+              {latestProducts.map((item) => (
+                <LatestProducts item={item} />
+              ))}
+            </div>
           </div>
-          <div className="row">
-            {features.map((item) => (
-              <Features item={item} />
-            ))}
+        </section>
+        <section className="feature py-5 mt-5" id="feature">
+          <div className="container">
+            <div className="section_title text-center mb-5">
+              <h1 className="text-capitalize">Our Features</h1>
+            </div>
+            <div className="row">
+              {features.map((item) => (
+                <Features item={item} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </Suspense>
     </div>
   );
 };
