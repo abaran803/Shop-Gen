@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import classes from "./LatestProducts.module.css";
 
 const LatestProducts = (props) => {
@@ -5,9 +6,9 @@ const LatestProducts = (props) => {
     <div className="col-md-4 col-12">
       <div className={`single_product shadow text-center p-1 ${classes.blockSize}`}>
         <div className="product_img">
-          <a href="product_detail.html">
+          <Link to="/product">
             <img src={props.item.image} alt="shirt1" className={classes.imageOrientation} />
-          </a>
+          </Link>
           {props.item.isNew && (
             <div className="new_product">
               <span className="badge py-2 px-3 badge-pill badge-danger">
@@ -19,7 +20,7 @@ const LatestProducts = (props) => {
         <div className="product-caption my-3">
           <div className="product-rating">{props.item.stars}</div>
           <h4>
-            <a href="product_detail.html">{props.item.title}</a>
+            <Link to="/product">{props.item.title}</Link>
           </h4>
           <div className="price">
             <b>

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const TotalCharge = () => {
   return (
     <div className="mb-3">
@@ -25,9 +27,9 @@ const TotalCharge = () => {
             </span>
           </li>
         </ul>
-        <a href="checkout.html" className="btn btn-primary btn-block">
+        <Link to="/checkout" className="btn btn-primary btn-block">
           Go to Checkout
-        </a>
+        </Link>
       </div>
     </div>
   );

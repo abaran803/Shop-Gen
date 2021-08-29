@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
+
 const FooterDescription = () => {
   return (
     <div className="col-md-3 col-6 pl-5 pl-small-15">
       <div className="footer_title">
-        <a href="index.html">
+        <Link to="/home">
           <i className="fas fa-eye fa-5x"></i>
-        </a>
+        </Link>
       </div>
       <div>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione cum
