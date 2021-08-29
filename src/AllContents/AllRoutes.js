@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
 import classes from "./AllRoutes.module.css";
 import { Redirect, Route, Switch } from "react-router-dom";
+import Checkout from "../Pages/Checkout";
 const About = React.lazy(() => import("../Pages/About"));
 const Cart = React.lazy(() => import("../Pages/Cart"));
 const Category = React.lazy(() => import("../Pages/Category"));
@@ -34,8 +35,8 @@ const AllRoutes = () => {
         <Route path="/cart">
           <Cart />
         </Route>
-        <Route path="/E-Commerce">
-          <MainContent />
+        <Route path="/checkout">
+          <Checkout />
         </Route>
         <Route path="/" exact>
           <Redirect to="/home" />
