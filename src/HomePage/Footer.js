@@ -7,21 +7,21 @@ import FooterSection from "./FooterContent.js/FooterSection";
 const Footer = () => {
   const Quick = [
     { name: "About", address: "/about" },
-    { name: "Offers & Discounts", address: "javascript:;" },
-    { name: "Get Coupon", address: "javascript:;" },
+    { name: "Offers & Discounts", address: "/" },
+    { name: "Get Coupon", address: "/" },
     { name: "Contact Us", address: "/contact" },
   ];
   const New = [
     { name: "Woman Cloth", address: "" },
-    { name: "Fashion Accessories", address: "javascript:;" },
-    { name: "Get Coupon", address: "javascript:;" },
-    { name: "Rubber made Toys", address: "javascript:;" },
+    { name: "Fashion Accessories", address: "/" },
+    { name: "Get Coupon", address: "/" },
+    { name: "Rubber made Toys", address: "/" },
   ];
   const Support = [
-    { name: "Frequently Asked Questions", address: "javascript:;" },
-    { name: "Terms & Conditions", address: "javascript:;" },
-    { name: "Privacy Policy", address: "javascript:;" },
-    { name: "Report a Payment Issue", address: "javascript:;" },
+    { name: "Frequently Asked Questions", address: "/" },
+    { name: "Terms & Conditions", address: "/" },
+    { name: "Privacy Policy", address: "/" },
+    { name: "Report a Payment Issue", address: "/" },
   ];
   const footerSection = [
     { name: "Quick Links", items: Quick },
