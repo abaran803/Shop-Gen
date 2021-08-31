@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { removeAllItem, removeOneItem } from "../ReduxComponents/CounterSlice";
 
 const CartItems = (props) => {
@@ -53,14 +54,14 @@ const CartItems = (props) => {
             </div>
             <div className="d-flex justify-content-between align-item-center">
               <div>
-                <a
-                  href="javascript:;"
+                <Link
+                  to="/cart"
                   type="button"
                   className="small text-uppercase mr-3"
                   onClick={removeCurrentItem}
                 >
                   <i className="fas fa-trash-alt mr-1"></i> Remove item{" "}
-                </a>
+                </Link>
               </div>
               <p className="mb-0">
                 <span>

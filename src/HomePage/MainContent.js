@@ -86,7 +86,7 @@ const MainContent = () => {
     },
     {
       iconClass: "fas fa-shipping-fast fa-3x mb-3 pt-2",
-      title: "Free Shipping Method",
+      title: "Free Shipping",
       desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel voluptate molestiae ullam! Minima deleniti, ipsam porro, quibusdam sint numquam voluptate fugiat nostrum necessitatibus excepturi inventore mollitia quis animi voluptatibus magnam pariatur enim voluptatum officia debitis!",
     },
   ];
