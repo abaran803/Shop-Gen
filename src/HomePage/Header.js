@@ -36,7 +36,7 @@ const Header = () => {
                 </Link>
               </li>
               {NavItems.map((item) => (
-                <Navs item={item} />
+                <Navs item={item} key={item.name} />
               ))}
             </ul>
             <form className="form-inline my-2 my-lg-0">

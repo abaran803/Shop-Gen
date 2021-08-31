@@ -22,7 +22,7 @@ const Cart = () => {
                     Cart (<span>{count}</span> items)
                   </h5>
                   {cartItems.map((item) => (
-                    <CartItems item={item} />
+                    <CartItems item={item} key={item.id} />
                   ))}
                 </Suspense>
               </div>

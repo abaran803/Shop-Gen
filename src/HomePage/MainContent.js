@@ -155,7 +155,7 @@ const MainContent = () => {
             </div>
             <div className="row">
               {categoryItems.map((item) => (
-                <ShopByCategory image={item.image} />
+                <ShopByCategory image={item.image} key={item.image} />
               ))}
             </div>
           </div>
@@ -167,7 +167,7 @@ const MainContent = () => {
             </div>
             <div className="row mb-5">
               {latestProducts.map((item) => (
-                <LatestProducts item={item} />
+                <LatestProducts item={item} key={item.title} />
               ))}
             </div>
           </div>
@@ -179,7 +179,7 @@ const MainContent = () => {
             </div>
             <div className="row">
               {features.map((item) => (
-                <Features item={item} />
+                <Features item={item} key={item.title} />
               ))}
             </div>
           </div>

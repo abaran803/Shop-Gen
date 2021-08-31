@@ -36,7 +36,7 @@ const Footer = () => {
             <div className="row">
               <FooterDescription />
               {footerSection.map((item) => (
-                <FooterSection name={item.name} items={item.items} />
+                <FooterSection name={item.name} items={item.items} key={item.name} />
               ))}
             </div>
           </div>

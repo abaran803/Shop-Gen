@@ -235,6 +235,7 @@ const Product = () => {
                   price={item.price}
                   stars={item.stars}
                   id={item.id}
+                    key={item.id}
                 />
               ))}
               </Suspense>
