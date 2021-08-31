@@ -1,12 +1,31 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import classes from "./Cart.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFromFirebase } from "../ReduxComponents/CounterSlice";
 const CartItems = React.lazy(() => import("./CartItems"));
 const TotalCharge = React.lazy(() => import("./TotalCharge"));
 
 const Cart = () => {
   const count = useSelector((state) => state.counter.length);
   const cartItems = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    async function fetchItemsHandler() {
+      const res = await fetch(
+        "https://e-commerce-cb57e-default-rtdb.firebaseio.com/cart.json"
+      );
+      const data = await res.json();
+      if (!data) {
+        return dispatch(fetchFromFirebase({ value: [], length: 0 }));
+      }
+      const allData = [];
+      for (const key in data) {
+        allData.push(data[key]);
+      }
+      dispatch(fetchFromFirebase({value: allData, length: allData.length}));
+    }
+    fetchItemsHandler();
+  }, [dispatch]);
   return (
     <section className="cart py-5 my-2" id="cart">
       <div className="container">

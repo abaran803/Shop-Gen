@@ -54,6 +54,25 @@ export const counterSlice = createSlice({
         size: item.size,
       });
       state.length++;
+      const sendingData = async () => {
+        await fetch(
+          "https://e-commerce-cb57e-default-rtdb.firebaseio.com/cart.json",
+          {
+            method: "POST",
+            body: JSON.stringify(newItem),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          }
+        )
+      };
+      sendingData();
+      alert("Item added to cart");
+    },
+    fetchFromFirebase: (state, action) => {
+      const data = action.payload;
+      state.value = data.value;
+      state.length = data.length;
     },
     removeAllItem: (state, action) => {
       state.value = state.value.filter((item) => item.id !== action.payload.id);
@@ -81,6 +100,7 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { addNew, removeOneItem, removeAllItem } = counterSlice.actions;
+export const { addNew, removeOneItem, removeAllItem, fetchFromFirebase } =
+  counterSlice.actions;
 
 export default counterSlice.reducer;
