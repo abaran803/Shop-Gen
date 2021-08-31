@@ -1,30 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: [
-    {
-      id: "a1",
-      name: "Blue denim shirt",
-      type: "SHIRT - BLUE",
-      color: "BLUE",
-      size: "M",
-      image:
-        "https://images.pexels.com/photos/297933/pexels-photo-297933.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-      totalPrice: 17.99,
-      quantity: 1,
-    },
-    {
-      id: "a2",
-      name: "Red hoodie",
-      type: "SHIRT - RED",
-      color: "COLOR: RED",
-      size: "M",
-      image:
-        "https://images.pexels.com/photos/994517/pexels-photo-994517.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-      totalPrice: 35.99,
-      quantity: 1,
-    },
-  ],
+  value: [],
   length: 2,
 };
 
@@ -43,7 +20,7 @@ export const counterSlice = createSlice({
         return;
       }
       const item = action.payload;
-      state.value.push({
+      const newItem = {
         id: item.id,
         name: item.title,
         image: item.image,
@@ -52,7 +29,8 @@ export const counterSlice = createSlice({
         type: item.type,
         color: item.color,
         size: item.size,
-      });
+      };
+      state.value.push(newItem);
       state.length++;
       const sendingData = async () => {
         await fetch(
@@ -64,7 +42,7 @@ export const counterSlice = createSlice({
               "Content-type": "application/json; charset=UTF-8",
             },
           }
-        )
+        );
       };
       sendingData();
       alert("Item added to cart");
