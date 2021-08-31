@@ -11,12 +11,12 @@ const ProductDetail = (props) => {
       title: "Dress1 with details",
       price: 400,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -30,12 +30,12 @@ const ProductDetail = (props) => {
       title: "Dress2 with details",
       price: 300,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -49,12 +49,12 @@ const ProductDetail = (props) => {
       title: "Dress3 with details",
       price: 800,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -68,12 +68,12 @@ const ProductDetail = (props) => {
       title: "Dress4 with details",
       price: 600,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -87,12 +87,12 @@ const ProductDetail = (props) => {
       title: "Dress5 with details",
       price: 500,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -106,12 +106,12 @@ const ProductDetail = (props) => {
       title: "Dress6 with details",
       price: 900,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -125,12 +125,12 @@ const ProductDetail = (props) => {
       title: "Dress7 with details",
       price: 300,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -144,12 +144,12 @@ const ProductDetail = (props) => {
       title: "Dress8 with details",
       price: 400,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -163,12 +163,12 @@ const ProductDetail = (props) => {
       title: "Dress9 with details",
       price: 600,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -189,30 +189,30 @@ const ProductDetail = (props) => {
   };
   return (
     <div>
-      <div class="product_detail py-5 my-5" id="product_detail">
-        <div class="container">
-          <div class="section_title text-center mb-5">
-            <h1 class="text-capitalize">product detail</h1>
+      <div className="product_detail py-5 my-5" id="product_detail">
+        <div className="container">
+          <div className="section_title text-center mb-5">
+            <h1 className="text-capitalize">product detail</h1>
           </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-12">
+          <div className="row">
+            <div className="col-md-6">
+              <div className="row">
+                <div className="col-md-12">
                   <div
                     id="carouselExampleIndicators"
-                    class="carousel slide shadow rounded"
+                    className="carousel slide shadow rounded"
                     data-ride="carousel"
                   >
-                    <ol class="carousel-indicators">
+                    <ol className="carousel-indicators">
                       <li
                         data-target="#carouselExampleIndicators"
                         data-slide-to="0"
-                        class="active"
+                        className="active"
                       >
                         <img
                           src={selectedItem.image}
-                          class="d-block w-100 img img-fluid rounded"
-                          alt="image"
+                          className="d-block w-100 img img-fluid rounded"
+                          alt=""
                           width="50px"
                         />
                       </li>
@@ -222,7 +222,7 @@ const ProductDetail = (props) => {
                       >
                         <img
                           src="https://thumbs.dreamstime.com/b/hanger-blank-white-t-shirt-yellow-background-space-text-hanger-blank-white-t-shirt-yellow-background-163266760.jpg"
-                          class="d-block w-100 img img-fluid rounded"
+                          className="d-block w-100 img img-fluid rounded"
                           alt=""
                           width="15px"
                         />
@@ -233,31 +233,31 @@ const ProductDetail = (props) => {
                       >
                         <img
                           src="https://us.123rf.com/450wm/peshkov/peshkov1904/peshkov190400211/120870898-hanger-with-empty-black-t-shirt-hanging-on-brick-wall-background-with-sunlight-shop-print-ad-concept.jpg?ver=6"
-                          class="d-block w-100 img img-fluid rounded"
+                          className="d-block w-100 img img-fluid rounded"
                           alt=""
                           width="15px"
                         />
                       </li>
                     </ol>
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
+                    <div className="carousel-inner">
+                      <div className="carousel-item active">
                         <img
                           src={selectedItem.image}
-                          class="d-block w-100 img img-fluid rounded"
+                          className="d-block w-100 img img-fluid rounded"
                           alt="..."
                         />
                       </div>
-                      <div class="carousel-item">
+                      <div className="carousel-item">
                         <img
                           src="https://thumbs.dreamstime.com/b/hanger-blank-white-t-shirt-yellow-background-space-text-hanger-blank-white-t-shirt-yellow-background-163266760.jpg"
-                          class="d-block w-100 img img-fluid rounded"
+                          className="d-block w-100 img img-fluid rounded"
                           alt="..."
                         />
                       </div>
-                      <div class="carousel-item">
+                      <div className="carousel-item">
                         <img
                           src="https://us.123rf.com/450wm/peshkov/peshkov1904/peshkov190400211/120870898-hanger-with-empty-black-t-shirt-hanging-on-brick-wall-background-with-sunlight-shop-print-ad-concept.jpg?ver=6"
-                          class="d-block w-100 img img-fluid rounded"
+                          className="d-block w-100 img img-fluid rounded"
                           alt="..."
                         />
                       </div>
@@ -266,27 +266,27 @@ const ProductDetail = (props) => {
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="title mb-4">
+            <div className="col-md-6">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="title mb-4">
                     <h3>{selectedItem.title}</h3>
                   </div>
-                  <div class="category mb-4">
-                    <span class="bg-light-gray p-2">
+                  <div className="category mb-4">
+                    <span className="bg-light-gray p-2">
                       <a href="category.html">SHIRT</a>
                     </span>
                   </div>
-                  <div class="rating d-flex text-danger mb-4">
+                  <div className="rating d-flex text-danger mb-4">
                     {selectedItem.stars}
                   </div>
-                  <div class="price mb-4">
+                  <div className="price mb-4">
                     <b>
-                      <span class="mr-1"></span>₹
+                      <span className="mr-1"></span>₹
                       <span>{selectedItem.price}</span>
                     </b>
                   </div>
-                  <div class="desc">
+                  <div className="desc">
                     <p>
                       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                       Adipisci dicta facere impedit illo non repellat saepe.
@@ -298,12 +298,12 @@ const ProductDetail = (props) => {
                       quidem vero nostrum aliquam odio. Magni, aut?
                     </p>
                   </div>
-                  <div class="qty_section border-top pt-2 mb-4">
+                  <div className="qty_section border-top pt-2 mb-4">
                     <label>Quantity</label>
                     <div>
-                      <div class="mb-0 w-100">
+                      <div className="mb-0 w-100">
                         <input
-                          class="quantity text-center"
+                          className="quantity text-center"
                           min="0"
                           max="10"
                           name="quantity"
@@ -313,14 +313,9 @@ const ProductDetail = (props) => {
                       </div>
                     </div>
                   </div>
-                  <div class="buy">
-                    <Link
-                      to="/cart"
-                      class="btn btn-primary shadow"
-                      onClick={addToCart}
-                    >
+                  <div className="buy">
+                    <div className="btn btn-primary shadow" onClick={addToCart}>
                       Add to Cart
-                    </Link>
                   </div>
                 </div>
               </div>

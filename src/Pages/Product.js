@@ -11,12 +11,12 @@ const Product = () => {
       title: "Dress1 with details",
       price: 400,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -30,12 +30,12 @@ const Product = () => {
       title: "Dress2 with details",
       price: 300,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -49,12 +49,12 @@ const Product = () => {
       title: "Dress3 with details",
       price: 800,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -68,12 +68,12 @@ const Product = () => {
       title: "Dress4 with details",
       price: 600,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -87,12 +87,12 @@ const Product = () => {
       title: "Dress5 with details",
       price: 500,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -106,12 +106,12 @@ const Product = () => {
       title: "Dress6 with details",
       price: 900,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -125,12 +125,12 @@ const Product = () => {
       title: "Dress7 with details",
       price: 300,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -144,12 +144,12 @@ const Product = () => {
       title: "Dress8 with details",
       price: 400,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -163,12 +163,12 @@ const Product = () => {
       title: "Dress9 with details",
       price: 600,
       stars: (
-        <div class="product-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
-          <i class="far fa-star"></i>
+        <div className="product-rating">
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="fas fa-star"></i>
+          <i className="far fa-star"></i>
+          <i className="far fa-star"></i>
         </div>
       ),
       type: "Shirt - Custom",
@@ -182,29 +182,29 @@ const Product = () => {
   };
   const selectedItems = items.filter((item) => item.price <= rangeValue);
   return (
-    <section class="products py-5 my 5" id="products">
-      <div class="container">
-        <div class="section_title text-center mb-5">
-          <h1 class="text-capitalize">Products</h1>
+    <section className="products py-5 my 5" id="products">
+      <div className="container">
+        <div className="section_title text-center mb-5">
+          <h1 className="text-capitalize">Products</h1>
         </div>
-        <div class="row">
-          <div class="col-md-3 border-right mb-small-5">
-            <h4 class="mb-5 border-bottom">Filters</h4>
-            <div class="mb-5">
+        <div className="row">
+          <div className="col-md-3 border-right mb-small-5">
+            <h4 className="mb-5 border-bottom">Filters</h4>
+            <div className="mb-5">
               <label>
                 <b>Category</b>
               </label>
-              <ul class="list-group">
-                <li class="list-group-item">Category 1</li>
-                <li class="list-group-item">Category 2</li>
-                <li class="list-group-item">Category 3</li>
-                <li class="list-group-item">Category 4</li>
-                <li class="list-group-item">Category 5</li>
+              <ul className="list-group">
+                <li className="list-group-item">Category 1</li>
+                <li className="list-group-item">Category 2</li>
+                <li className="list-group-item">Category 3</li>
+                <li className="list-group-item">Category 4</li>
+                <li className="list-group-item">Category 5</li>
               </ul>
             </div>
             <div>
               <form>
-                <div class="form-group">
+                <div className="form-group">
                   <label>
                     <b>Price</b>
                   </label>
@@ -214,19 +214,19 @@ const Product = () => {
                     min="100"
                     max="1000"
                     step="100"
-                    class="form-control-range"
+                    className="form-control-range"
                     value={rangeValue}
                   />
                 </div>
               </form>
-              <div class="d-flex justify-content-between">
+              <div className="d-flex justify-content-between">
                 <label>₹{rangeValue}</label>
                 <label>₹1000</label>
               </div>
             </div>
           </div>
-          <div class="col-md-9">
-            <div class="row mb-5">
+          <div className="col-md-9">
+            <div className="row mb-5">
               <Suspense fallback={<div className={classes.loading}></div>}>
               {selectedItems.map((item) => (
                 <Items
