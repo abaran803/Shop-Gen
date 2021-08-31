@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { addNew } from "../ReduxComponents/CounterSlice";
+import RelatedItems from "./RelatedItems";
 
 const ProductDetail = (props) => {
   const items = [
@@ -184,8 +185,18 @@ const ProductDetail = (props) => {
   }
   const selectedItem = items[ind];
   const addToCart = () => {
-    console.log(selectedItem);
-    dispatch(addNew(selectedItem));
+    const item = selectedItem;
+    const newItem = {
+      id: item.id,
+      name: item.title,
+      image: item.image,
+      totalPrice: 1 * item.price,
+      quantity: 1,
+      type: item.type,
+      color: item.color,
+      size: item.size,
+    };
+    dispatch(addNew(newItem));
   };
   return (
     <div>
