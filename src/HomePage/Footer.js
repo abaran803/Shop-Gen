@@ -3,31 +3,17 @@ import BackTop from "./FooterContent.js/BackTop";
 import CopyRight from "./FooterContent.js/CopyRight";
 import FooterDescription from "./FooterContent.js/FooterDescription";
 import FooterSection from "./FooterContent.js/FooterSection";
+import {useSelector} from "react-redux";
 
 const Footer = () => {
-  const Quick = [
-    { name: "About", address: "/about" },
-    { name: "Offers & Discounts", address: "/" },
-    { name: "Get Coupon", address: "/" },
-    { name: "Contact Us", address: "/contact" },
-  ];
-  const New = [
-    { name: "Woman Cloth", address: "" },
-    { name: "Fashion Accessories", address: "/" },
-    { name: "Get Coupon", address: "/" },
-    { name: "Rubber made Toys", address: "/" },
-  ];
-  const Support = [
-    { name: "Frequently Asked Questions", address: "/" },
-    { name: "Terms & Conditions", address: "/" },
-    { name: "Privacy Policy", address: "/" },
-    { name: "Report a Payment Issue", address: "/" },
-  ];
+
+  const {quick, newProduct, support} = useSelector(state => state.siteData.data);
   const footerSection = [
-    { name: "Quick Links", items: Quick },
-    { name: "New Products", items: New },
-    { name: "Support", items: Support },
+    { name: "Quick Links", items: quick },
+    { name: "New Products", items: newProduct },
+    { name: "Support", items: support },
   ];
+
   return (
     <Fragment>
       <section className="footer_section pt-5 pb-2" id="footer_section">
@@ -35,9 +21,9 @@ const Footer = () => {
           <div className="container-fluid">
             <div className="row">
               <FooterDescription />
-              {footerSection.map((item) => (
+              {footerSection ? footerSection.map((item) => (
                 <FooterSection name={item.name} items={item.items} key={item.name} />
-              ))}
+              )) : <h3 className='w-100 text text-center mt-5'>No data found</h3>}
             </div>
           </div>
           <CopyRight />

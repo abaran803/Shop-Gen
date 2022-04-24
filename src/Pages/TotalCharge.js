@@ -1,21 +1,22 @@
 import { Link } from "react-router-dom";
 
-const TotalCharge = () => {
+const TotalCharge = ({cartItems}) => {
+
+  let sum = 0;
+
   return (
     <div className="mb-3">
       <div className="pt-4">
         <h5 className="mb-3">Order summary</h5>
         <ul className="list-group list-group-flush">
-          <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-2">
-            <span>Product name 1</span>
-            <span>x2</span>
-            <span>₹25.98</span>
-          </li>
-          <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-2">
-            <span>Product name 2</span>
-            <span>x2</span>
-            <span>₹25.98</span>
-          </li>
+          {cartItems.map(item => {
+            sum += Number(item.price) * Number(item.quantity);
+            return (<li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-2">
+              <span>{item.name}</span>
+              <span>x{item.quantity}</span>
+              <span>₹{Number(item.price) * Number(item.quantity)}</span>
+            </li>)
+          })}
           <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
             <div>
               <strong>
@@ -23,7 +24,7 @@ const TotalCharge = () => {
               </strong>
             </div>
             <span>
-              <strong>₹53.98</strong>
+              <strong>₹{sum}</strong>
             </span>
           </li>
         </ul>

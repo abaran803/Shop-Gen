@@ -8,7 +8,7 @@ const FooterSection = (props) => {
       </div>
       <div className="footer_links">
         <ul>
-          {props.items.map((item) => (
+          {props.items && props.items.map((item) => (
             <FooterItems item={item} key={item.name} />
           ))}
         </ul>

@@ -3,7 +3,7 @@ import React, { Component, Fragment } from "react";
 export default class RelatedItems extends Component {
   render() {
     return (
-      <Fragment>
+      <div className='container'>
         <section className="related-products py-5 my-5" id="related_products">
           <div className="title">
             <h3>Related Products</h3>
@@ -59,7 +59,7 @@ export default class RelatedItems extends Component {
             </div>
           </div>
         </section>
-      </Fragment>
+      </div>
     );
   }
 }

@@ -1,84 +1,164 @@
-import { createSlice } from "@reduxjs/toolkit";
+import React, {Fragment} from "react";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {addNewItemToBackend, fetchCartFromBackend, getSiteDataFromBackend, removeAllFromBackend} from "../API/api";
+
+const getAllCartData = createAsyncThunk(
+    'item/getData',
+    async () => {
+        return await fetchCartFromBackend();
+    }
+)
+
+const addNewCartItem = createAsyncThunk(
+    'item/add',
+    async (item) => {
+        return await addNewItemToBackend(item)
+    }
+)
+
+const removeAllCartItem = createAsyncThunk(
+    'items/removeAll',
+    async (item) => {
+        return await removeAllFromBackend(item)
+    }
+)
+
+const getSiteData = createAsyncThunk(
+    'items/getSiteData',
+    async (item) => {
+        return await getSiteDataFromBackend();
+    }
+)
 
 const initialState = {
-  value: [],
-  length: 2,
+    value: []
 };
 
+const siteDataState = {
+    data: {}
+}
+
 export const counterSlice = createSlice({
-  name: "counter",
-  initialState,
-  reducers: {
-    addNew: (state, action) => {
-      const ind = state.value.findIndex(
-        (item) => item.id === action.payload.id
-      );
-      if (ind !== -1) {
-        const selectedItem = state.value[ind];
-        selectedItem.totalPrice += action.payload.price;
-        selectedItem.quantity++;
-        return;
-      }
-      const item = action.payload;
-      const newItem = {
-        id: item.id,
-        name: item.title,
-        image: item.image,
-        totalPrice: 1 * item.price,
-        quantity: 1,
-        type: item.type,
-        color: item.color,
-        size: item.size,
-      };
-      state.value.push(newItem);
-      state.length++;
-      const sendingData = async () => {
-        await fetch(
-          "https://e-commerce-cb57e-default-rtdb.firebaseio.com/cart.json",
-          {
-            method: "POST",
-            body: JSON.stringify(newItem),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
-          }
-        );
-      };
-      sendingData();
-      alert("Item added to cart");
+    name: "counter",
+    initialState,
+    reducers: {
+        removeOneItem: (state, action) => {
+            const ind = state.value.findIndex(
+                (item) => item.id === action.payload.id
+            );
+            if (ind === -1) {
+                return;
+            }
+            if (state.value[ind].quantity === 1) {
+                state.value = state.value.filter(
+                    (item) => item.id !== action.payload.id
+                );
+                return;
+            }
+            const selectedItem = state.value[ind];
+            selectedItem.quantity--;
+        },
+        addOneItem: (state, action) => {
+            const ind = state.value.findIndex(
+                (item) => item.id === action.payload.id
+            );
+            if (ind === -1) {
+                return;
+            }
+            const selectedItem = state.value[ind];
+            selectedItem.quantity++;
+        },
+        addNewToBackend: (state, action) => {
+            const ind = state.value.findIndex(
+                (item) => item.id === action.payload.id
+            );
+            if (ind !== -1) {
+                const selectedItem = state.value[ind];
+                selectedItem.quantity++;
+                console.log("dddd")
+                return;
+            }
+            const item = action.payload;
+            state.value.push(item);
+            console.log("dcv")
+            // const sendingData = async () => {
+            //     await fetch(
+            //         "http://localhost:3001/add-item",
+            //         {
+            //             method: "POST",
+            //             body: JSON.stringify(newItem),
+            //             headers: {
+            //                 "Content-type": "application/json; charset=UTF-8",
+            //             },
+            //         }
+            //     );
+            // };
+            // sendingData();
+            alert("Item added to cart");
+        },
+        fetchData: (state, action) => {
+            const data = action.payload;
+            state.value = data.value;
+        },
     },
-    fetchFromFirebase: (state, action) => {
-      const data = action.payload;
-      state.value = data.value;
-      state.length = data.length;
-    },
-    removeAllItem: (state, action) => {
-      state.value = state.value.filter((item) => item.id !== action.payload.id);
-      state.length--;
-    },
-    removeOneItem: (state, action) => {
-      const ind = state.value.findIndex(
-        (item) => item.id === action.payload.id
-      );
-      if (ind === -1) {
-        return;
-      }
-      if (state.value[ind].quantity === 1) {
-        state.value = state.value.filter(
-          (item) => item.id !== action.payload.id
-        );
-        state.length--;
-        return;
-      }
-      const selectedItem = state.value[ind];
-      selectedItem.totalPrice -=
-        selectedItem.totalPrice / selectedItem.quantity;
-      selectedItem.quantity--;
-    },
-  },
+    extraReducers: (builder) => {
+
+        builder.addCase(removeAllCartItem.fulfilled, (state, action) => {
+            console.log(action.payload)
+            if (action.payload) {
+                const id = action.meta.arg.id;
+                const ind = state.value.findIndex(
+                    (item) => item.id === id
+                );
+                if (ind === -1) {
+                    return;
+                }
+                state.value = state.value.filter(item => item.id !== id);
+            }
+        })
+
+        builder.addCase(addNewCartItem.fulfilled, (state, action) => {
+            const id = action.meta.arg.id;
+            console.log(action.meta.arg);
+            if (action.payload) {
+                const ind = state.value.findIndex(
+                    (item) => item.id === id
+                );
+                if (ind !== -1) {
+                    const selectedItem = state.value[ind];
+                    selectedItem.quantity++;
+                    return;
+                }
+                const item = action.meta.arg;
+                state.value.push(item);
+            }
+        })
+
+        builder.addCase(getAllCartData.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.value = action.payload;
+            }
+        })
+    }
 });
 
-export const { addNew, removeOneItem, removeAllItem, fetchFromFirebase } =
-  counterSlice.actions;
+const siteData = createSlice({
+    name: "siteData",
+    initialState: siteDataState,
+    reducers: {},
+    extraReducers: (builder) => {
+
+        builder.addCase(getSiteData.fulfilled, (state, action) => {
+            console.log(action.payload.data)
+            if (action.payload) {
+                state.data = action.payload.data;
+            }
+        })
+    }
+});
+
+export const {removeOneItem, addOneItem, fetchData} =
+    counterSlice.actions;
 
 export default counterSlice.reducer;
+export {siteData, getSiteData, getAllCartData, addNewCartItem, removeAllCartItem};

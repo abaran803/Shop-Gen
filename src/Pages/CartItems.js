@@ -1,15 +1,18 @@
 import { Fragment } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeAllItem, removeOneItem } from "../ReduxComponents/CounterSlice";
+import {addOneItem, removeAllCartItem, removeOneItem} from "../ReduxComponents/CounterSlice";
 
 const CartItems = (props) => {
   const dispatch = useDispatch();
   const removeCurrentItem = () => {
-    dispatch(removeAllItem(props.item));
+    dispatch(removeAllCartItem(props.item));
   };
   const reduceCurrentItem = () => {
     dispatch(removeOneItem(props.item));
+  };
+  const addCurrentItem = () => {
+    dispatch(addOneItem(props.item));
   };
   return (
     <Fragment>
@@ -27,7 +30,7 @@ const CartItems = (props) => {
           <div>
             <div className="d-flex justify-content-between">
               <div>
-                <h5>{props.item.name}</h5>
+                <h5>{props.item.title}</h5>
                 <p className="mb-3 text-muted text-uppercase small">
                   {props.item.type}
                 </p>
@@ -39,12 +42,18 @@ const CartItems = (props) => {
                 </p>
               </div>
               <div>
-                <div className="mb-0 w-100">
+                <div className="mb-0 w-100 d-flex justify-content-around">
                   <button
                     onClick={reduceCurrentItem}
                     className="btn btn-sm btn-outline-primary"
                   >
                     <i className="fas fa-minus"></i>
+                  </button>
+                  <button
+                    onClick={addCurrentItem}
+                    className="btn btn-sm btn-outline-primary"
+                  >
+                    <i className="fas fa-plus"></i>
                   </button>
                 </div>
                 <small className="form-text text-muted text-center">
@@ -65,7 +74,7 @@ const CartItems = (props) => {
               </div>
               <p className="mb-0">
                 <span>
-                  <strong id="summary">₹{props.item.totalPrice}</strong>
+                  <strong id="summary">₹{props.item.price}</strong>
                 </span>
               </p>
             </div>
