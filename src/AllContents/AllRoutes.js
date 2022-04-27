@@ -26,6 +26,9 @@ const AllRoutes = () => {
         <Route path="/product" exact>
           <Product />
         </Route>
+        <Route path="/product/category/:category" exact>
+          <Product />
+        </Route>
         <Route path="/product/:id">
           <ProductDetail />
         </Route>

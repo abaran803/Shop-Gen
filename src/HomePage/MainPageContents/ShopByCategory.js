@@ -5,7 +5,7 @@ const ShopByCategory = (props) => {
   return (
     <div className="col-md-4 col-12">
       <div className="card text-white p-4">
-        <Link to="/category.html">
+        <Link to={`/product/category/${props.name}`}>
           <img
             className="card-img img img-fluid"
             src={props.image}

@@ -1,10 +1,38 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import classes from "./Product.module.css";
 import {useSelector} from "react-redux";
+import { useParams } from "react-router-dom";
+import { getCategories, getItemsByCategory, getProducts } from "../API/api";
+import { Link } from "react-router-dom";
 const Items = React.lazy(() => import("./Items"));
 
 const Product = () => {
-  const {items, categories} = useSelector(state => state.siteData.data);
+  const pageCategory = useParams();
+  const [categories, setCategories] = useState();
+  const [items, setItems] = useState();
+  useEffect(() => {
+    const getItemsByCategoryData = async (category) => {
+      if(!category) {
+        const value = await getProducts(50);
+        const data = await value.json();
+        setItems(data);
+      } else {
+        console.log(category)
+        const value = await getItemsByCategory(category);
+        const data = await value.json();
+        setItems(data);
+      }
+    }
+    getItemsByCategoryData(pageCategory.category);
+
+    const getCategoriesData = async (count) => {
+      const value = await getCategories(count);
+      const data = await value.json();
+      setCategories(data);
+    }
+    getCategoriesData(4);
+  }, [pageCategory])
+  console.log(items);
   const [rangeValue, setRangeValue] = useState(500);
   const changeHandler = (e) => {
     setRangeValue(e.target.value);
@@ -25,7 +53,9 @@ const Product = () => {
               </label>
               <ul className="list-group">
                 {categories ? categories.map(category => (
-                  <li className="list-group-item" key={category}>{category}</li>
+                  <li className="list-group-item" key={category.id}>
+                    <Link to={`/product/category/${category.category}`}>{category.category}</Link>
+                    </li>
                 )) : <h3>No data found</h3>}
               </ul>
             </div>
@@ -38,17 +68,17 @@ const Product = () => {
                   <input
                     onChange={changeHandler}
                     type="range"
-                    min="100"
+                    min="50"
                     max="1000"
-                    step="100"
+                    step="50"
                     className="form-control-range"
                     value={rangeValue}
                   />
                 </div>
               </form>
               <div className="d-flex justify-content-between">
-                <label>₹{rangeValue}</label>
-                <label>₹1000</label>
+                <label>${rangeValue}</label>
+                <label>$1000</label>
               </div>
             </div>
           </div>
@@ -60,7 +90,7 @@ const Product = () => {
                   image={item.image}
                   title={item.title}
                   price={item.price}
-                  stars={item.stars}
+                  // stars={item.stars}
                   id={item.id}
                     key={item.id}
                 />

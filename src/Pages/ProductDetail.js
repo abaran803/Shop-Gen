@@ -2,19 +2,34 @@ import {useDispatch, useSelector} from "react-redux";
 import { useParams } from "react-router-dom";
 import RelatedItems from "./RelatedItems";
 import {addNewCartItem} from "../ReduxComponents/CounterSlice";
+import { useEffect, useState } from "react";
+import { getProductDetails } from "../API/api";
 
 const ProductDetail = (props) => {
-  const {items} = useSelector(state => state.siteData.data)
+  // const {items} = useSelector(state => state.siteData.data)
+  const [item, setItem] = useState();
   const dispatch = useDispatch();
   const pageId = useParams();
-  const ind = (items ? items.findIndex((item) => item.id === pageId.id) : -1);
-  if (ind === -1) {
-    return <div>Item not found</div>;
+  useEffect(() => {
+    const getItemDetails = async (id) => {
+      const value = await getProductDetails(id);
+      const data = await value.json();
+      setItem(data);
+    }
+    getItemDetails(pageId.id);
+  }, [])
+  // const ind = (items ? items.findIndex((item) => item.id === pageId.id) : -1);
+  // if (ind === -1) {
+  //   return <div>Item not found</div>;
+  // }
+  console.log();
+  if(!item) {
+    return <h1>Item not found</h1>
   }
-  const selectedItem = items[ind];
+  // const selectedItem = items[ind];
+  const selectedItem = item;
   const addToCart = () => {
     const item = selectedItem;
-    alert("Hwllll")
     const newItem = {
       id: item.id,
       title: item.title,
@@ -51,9 +66,9 @@ const ProductDetail = (props) => {
                       >
                         <img
                           src={selectedItem.image}
-                          className="d-block w-100 img img-fluid rounded"
+                          className="d-block img img-fluid rounded"
                           alt=""
-                          width="50px"
+                          style={{width: "50px !important"}}
                         />
                       </li>
                       <li
@@ -83,7 +98,9 @@ const ProductDetail = (props) => {
                       <div className="carousel-item active">
                         <img
                           src={selectedItem.image}
-                          className="d-block w-100 img img-fluid rounded"
+                          className="d-block img img-fluid rounded m-auto"
+                          width='100%'
+                          style={{maxWidth: "360px", maxHeight: "500px"}}
                           alt="..."
                         />
                       </div>
@@ -118,31 +135,24 @@ const ProductDetail = (props) => {
                     </span>
                   </div>
                   <div className="rating d-flex text-danger mb-4">
-                    {
+                    {/* {
                       <div>
                             <i className={selectedItem.stars[0]}></i>
                             <i className={selectedItem.stars[1]}></i>
                             <i className={selectedItem.stars[2]}></i>
                             <i className={selectedItem.stars[3]}></i>
                             <i className={selectedItem.stars[4]}></i>
-                        </div>}
+                        </div>} */}
                   </div>
                   <div className="price mb-4">
                     <b>
-                      <span className="mr-1"></span>₹
+                      <span className="mr-1"></span>$
                       <span>{selectedItem.price}</span>
                     </b>
                   </div>
                   <div className="desc">
                     <p>
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                      Adipisci dicta facere impedit illo non repellat saepe.
-                      Voluptatem quasi dolor soluta nesciunt repellat eaque
-                      molestiae cum, tempora ullam est iusto laboriosam quos
-                      architecto dolorem adipisci voluptatum cumque sint, rem
-                      minima modi quisquam itaque officia. Doloremque maiores
-                      quam ipsam placeat veritatis, optio deleniti repellat quos
-                      quidem vero nostrum aliquam odio. Magni, aut?
+                      {selectedItem.description}
                     </p>
                   </div>
                   <div className="qty_section border-top pt-2 mb-4">

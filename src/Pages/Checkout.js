@@ -93,12 +93,12 @@ const Checkout = () => {
                     <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-2">
                       <span>Product name 1</span>
                       <span>x2</span>
-                      <span>₹25.98</span>
+                      <span>$25.98</span>
                     </li>
                     <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-2">
                       <span>Product name 2</span>
                       <span>x2</span>
-                      <span>₹25.98</span>
+                      <span>$25.98</span>
                     </li>
                     <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                       <div>
@@ -107,7 +107,7 @@ const Checkout = () => {
                         </strong>
                       </div>
                       <span>
-                        <strong>₹53.98</strong>
+                        <strong>$53.98</strong>
                       </span>
                     </li>
                   </ul>

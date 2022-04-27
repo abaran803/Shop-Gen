@@ -3,12 +3,11 @@ import classes from "./LatestProducts.module.css";
 import { Fragment } from "react";
 
 const LatestProducts = (props) => {
-    console.log(props.id);
     return (
         <div className="col-md-4 col-12">
             <div className={`single_product shadow text-center p-4 ${classes.blockSize}`}>
                 <div className="product_img">
-                    <Link to="/product">
+                    <Link to={`/product/${props.id}`}>
                         <img src={props.item.image} alt="shirt1" className={classes.imageOrientation} />
                     </Link>
                     <div className="new_product">

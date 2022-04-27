@@ -1,8 +1,22 @@
-import {useSelector} from "react-redux";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { getCategories } from "../API/api";
 
 const Category = () => {
 
-    const categories = useSelector(state => state.siteData.data.categoriesPageData);
+    // const categories = useSelector(state => state.siteData.data.categoriesPageData);
+    const [categories, setCategories] = useState();
+
+    useEffect(() => {
+        const getCategoriesData = async (count) => {
+            const value = await getCategories(count);
+            const data = await value.json();
+            console.log(data);
+            setCategories(data);
+        }
+        getCategoriesData(4);
+    })
 
     return (
         <div className="product py-5 my-5 bg-light" id="products">
@@ -13,24 +27,25 @@ const Category = () => {
                 <div className="row mb-5">
                     {categories ? categories.map((category => (
                         <div className="col-md-4 mb-4 col-12" key={category.id}>
-                            <div className="single_product shadow text-center p-1">
+                            <div className="single_product shadow text-center p-3" style={{ height: "100%" }}>
                                 <div className="product_img">
-                                    <a href={category.productLink}>
+                                    <Link to={`/product/category/${category.category}`}>
                                         <img
-                                            src={category.productImage}
+                                            src={category.image}
                                             alt=""
                                             className="img img-fluid rounded"
+                                            style={{ height: "300px" }}
                                         />
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="product_caption my-3">
                                     <h4>
-                                        <a href={category.productLink}>{category.productName}</a>
+                                        <a href={category.productLink}>{category.category}</a>
                                     </h4>
                                 </div>
                                 <div className="mt-3">
                                     <p>
-                                        {category.productDescription}
+                                        {category.description}
                                     </p>
                                 </div>
                             </div>

@@ -74,7 +74,7 @@ const CartItems = (props) => {
               </div>
               <p className="mb-0">
                 <span>
-                  <strong id="summary">₹{props.item.price}</strong>
+                  <strong id="summary">${props.item.price}</strong>
                 </span>
               </p>
             </div>

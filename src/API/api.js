@@ -94,6 +94,11 @@ const getProductDetails = async (id) => {
     return product;
 }
 
+const getItemsByCategory = async (category) => {
+    const products = await fetch(`${URL2}/getProductsByCategory/${category}`);
+    return products;
+}
+
 export {
     getSiteDataFromBackend, 
     fetchCartFromBackend, 
@@ -101,5 +106,6 @@ export {
     removeAllFromBackend,
     getCategories,
     getProducts,
-    getProductDetails
+    getProductDetails,
+    getItemsByCategory
 }
