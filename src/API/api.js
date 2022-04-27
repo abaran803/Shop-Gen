@@ -1,7 +1,7 @@
 import {fetchData} from "../ReduxComponents/CounterSlice";
 
-const URL = "https://ancient-plateau-36518.herokuapp.com";
-const URL2 = "http://localhost:8080";
+const URL = process.env.REACT_APP_BACKEND_URL
+console.log(process.env);
 
 export const fetchFromBackend = () => async dispatch => {
     try {
@@ -80,22 +80,22 @@ const removeAllFromBackend = async item => {
 }
 
 const getCategories = async (count) => {
-    const categories = await fetch(`${URL2}/${count}`);
+    const categories = await fetch(`${URL}/${count}`);
     return categories;
 }
 
 const getProducts = async (count) => {
-    const products = await fetch(`${URL2}/someProducts/${count}`);
+    const products = await fetch(`${URL}/someProducts/${count}`);
     return products;
 }
 
 const getProductDetails = async (id) => {
-    const product = await fetch(`${URL2}/getSpecificProduct/${id}`)
+    const product = await fetch(`${URL}/getSpecificProduct/${id}`)
     return product;
 }
 
 const getItemsByCategory = async (category) => {
-    const products = await fetch(`${URL2}/getProductsByCategory/${category}`);
+    const products = await fetch(`${URL}/getProductsByCategory/${category}`);
     return products;
 }
 
