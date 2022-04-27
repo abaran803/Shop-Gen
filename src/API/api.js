@@ -1,10 +1,11 @@
 import {fetchData} from "../ReduxComponents/CounterSlice";
 
-const URL = "http://localhost:3001";
+const URL = "https://ancient-plateau-36518.herokuapp.com";
+const URL2 = "http://localhost:8080";
 
 export const fetchFromBackend = () => async dispatch => {
     try {
-        const res = await fetch("http://localhost:3001/gets-items");
+        const res = await fetch(URL+"/gets-items");
         if (!res.OK) {
             throw new Error("Error Occured");
         }
@@ -19,7 +20,7 @@ export const fetchFromBackend = () => async dispatch => {
 
 const getSiteDataFromBackend = async () => {
     try {
-        const response = await fetch("http://localhost:8080/site-data/");
+        const response = await fetch(URL+"/site-data/");
         if (!response.ok) {
             throw new Error("Something went wrong");
         }
@@ -31,7 +32,7 @@ const getSiteDataFromBackend = async () => {
 
 const fetchCartFromBackend = async () => {
     try {
-        const response = await fetch("http://localhost:8080/get-items/");
+        const response = await fetch(URL+"/get-items/");
         if (!response.ok) {
             throw new Error("Something went wrong");
         }
@@ -43,7 +44,7 @@ const fetchCartFromBackend = async () => {
 
 const addNewItemToBackend = async item => {
     try {
-        const response = await fetch("http://localhost:8080/add-new/" + item.id, {
+        const response = await fetch(URL+"/add-new/" + item.id, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -61,7 +62,7 @@ const addNewItemToBackend = async item => {
 
 const removeAllFromBackend = async item => {
     try {
-        const response = await fetch("http://localhost:8080/remove-all/" + item.id, {
+        const response = await fetch(URL+"/remove-all/" + item.id, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -78,4 +79,27 @@ const removeAllFromBackend = async item => {
     }
 }
 
-export {getSiteDataFromBackend, fetchCartFromBackend, addNewItemToBackend, removeAllFromBackend}
+const getCategories = async (count) => {
+    const categories = await fetch(`${URL2}/${count}`);
+    return categories;
+}
+
+const getProducts = async (count) => {
+    const products = await fetch(`${URL2}/someProducts/${count}`);
+    return products;
+}
+
+const getProductDetails = async (id) => {
+    const product = await fetch(`${URL2}/getSpecificProduct/${id}`)
+    return product;
+}
+
+export {
+    getSiteDataFromBackend, 
+    fetchCartFromBackend, 
+    addNewItemToBackend, 
+    removeAllFromBackend,
+    getCategories,
+    getProducts,
+    getProductDetails
+}

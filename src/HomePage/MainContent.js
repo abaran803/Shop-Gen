@@ -1,6 +1,7 @@
 import classes from "./MainContent.module.css";
-import React, { Fragment, Suspense } from "react";
+import React, { Fragment, Suspense, useEffect, useState } from "react";
 import {useSelector} from "react-redux";
+import { getCategories, getProducts } from "../API/api";
 const Features = React.lazy(() => import("./MainPageContents/Features"));
 const LatestProducts = React.lazy(() =>
   import("./MainPageContents/LatestProducts")
@@ -11,7 +12,24 @@ const ShopByCategory = React.lazy(() =>
 
 const MainContent = () => {
 
-  const {categoryItems, latestProducts, features} = useSelector(state => state.siteData.data);
+  const {features} = useSelector(state => state.siteData.data);
+  const [categoryItems, setCategoryItems] = useState();
+  const [latestProducts, setLatestProducts] = useState();
+
+  useEffect(() => {
+    const getCategoriesData = async (count) => {
+      const value = await getCategories(count);
+      const data = await value.json();
+      setCategoryItems(data);
+    }
+    getCategoriesData(3);
+    const getProductsData = async (count) => {
+      const value = await getProducts(count);
+      const data = await value.json();
+      setLatestProducts(data);
+    }
+    getProductsData(3);
+  }, [])
 
   return (
     <div>
@@ -78,7 +96,7 @@ const MainContent = () => {
             </div>
             <div className="row">
               {categoryItems ? categoryItems.map((item) => (
-                <ShopByCategory image={item.image} key={item.image} />
+                <ShopByCategory image={item.image} name={item.category} key={item.id} />
               )) : <h3 className='w-100 text text-center mt-5'>No data found</h3>}
             </div>
           </div>
@@ -90,7 +108,7 @@ const MainContent = () => {
             </div>
             <div className="row mb-5">
               {latestProducts ? latestProducts.map((item) => (
-                <LatestProducts item={item} key={item.title} />
+                <LatestProducts item={item} key={item.id} id={item.id} />
               )) : <h3 className='w-100 text text-center mt-5'>No data found</h3>}
             </div>
           </div>
