@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 const TotalCharge = ({cartItems}) => {
 
   let sum = 0;
+  console.log(cartItems);
 
   return (
     <div className="mb-3">
@@ -12,7 +13,7 @@ const TotalCharge = ({cartItems}) => {
           {cartItems.map(item => {
             sum += Number(item.price) * Number(item.quantity);
             return (<li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-2">
-              <span>{item.name}</span>
+              <span>{item.title.length > 10 ? item.title.slice(0, 10) + "..." : item.title}</span>
               <span>x{item.quantity}</span>
               <span>${Number(item.price) * Number(item.quantity)}</span>
             </li>)

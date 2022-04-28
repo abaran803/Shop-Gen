@@ -1,39 +1,43 @@
-import React, { Suspense, useEffect, useState } from "react";
-import classes from "./Product.module.css";
-import {useSelector} from "react-redux";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCategories, getItemsByCategory, getProducts } from "../API/api";
 import { Link } from "react-router-dom";
+import Loader from "../Components/Loader";
 const Items = React.lazy(() => import("./Items"));
 
 const Product = () => {
   const pageCategory = useParams();
   const [categories, setCategories] = useState();
   const [items, setItems] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [rangeValue, setRangeValue] = useState(500);
   useEffect(() => {
+    setIsLoading(true);
     const getItemsByCategoryData = async (category) => {
       if(!category) {
         const value = await getProducts(50);
         const data = await value.json();
+        setIsLoading(false);
         setItems(data);
       } else {
-        console.log(category)
         const value = await getItemsByCategory(category);
         const data = await value.json();
+        setIsLoading(false);
         setItems(data);
       }
     }
     getItemsByCategoryData(pageCategory.category);
+  }, [pageCategory])
 
+  useEffect(() => {
     const getCategoriesData = async (count) => {
+      setIsLoading(true);
       const value = await getCategories(count);
       const data = await value.json();
       setCategories(data);
     }
     getCategoriesData(4);
-  }, [pageCategory])
-  console.log(items);
-  const [rangeValue, setRangeValue] = useState(500);
+  }, [])
   const changeHandler = (e) => {
     setRangeValue(e.target.value);
   };
@@ -42,7 +46,7 @@ const Product = () => {
     <section className="products py-5 my 5" id="products">
       <div className="container">
         <div className="section_title text-center mb-5">
-          <h1 className="text-capitalize">Products</h1>
+          <h1 className="text-capitalize">{pageCategory.category ? pageCategory.category : "All Products"}</h1>
         </div>
         <div className="row">
           <div className="col-md-3 border-right mb-small-5">
@@ -56,7 +60,7 @@ const Product = () => {
                   <li className="list-group-item" key={category.id}>
                     <Link to={`/product/category/${category.category}`}>{category.category}</Link>
                     </li>
-                )) : <h3>No data found</h3>}
+                )) : <Loader />}
               </ul>
             </div>
             <div>
@@ -84,8 +88,7 @@ const Product = () => {
           </div>
           <div className="col-md-9">
             <div className="row mb-5">
-              <Suspense fallback={<div className={classes.loading}></div>}>
-              {selectedItems ? selectedItems.map((item) => (
+              {isLoading ? <Loader /> : selectedItems ? selectedItems.map((item) => (
                 <Items
                   image={item.image}
                   title={item.title}
@@ -95,7 +98,6 @@ const Product = () => {
                     key={item.id}
                 />
               )) : <h3 className='w-100 text text-center mt-5'>No data found</h3>}
-              </Suspense>
             </div>
           </div>
         </div>

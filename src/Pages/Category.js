@@ -2,21 +2,28 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCategories } from "../API/api";
+import Loader from "../Components/Loader";
 
 const Category = () => {
 
     // const categories = useSelector(state => state.siteData.data.categoriesPageData);
     const [categories, setCategories] = useState();
+    const [isLoading, setIsLoading] = useState();
 
     useEffect(() => {
+        setIsLoading(true);
         const getCategoriesData = async (count) => {
             const value = await getCategories(count);
             const data = await value.json();
-            console.log(data);
+            setIsLoading(false);
             setCategories(data);
         }
         getCategoriesData(4);
-    })
+    }, [])
+
+    if(isLoading) {
+        return <Loader />
+    }
 
     return (
         <div className="product py-5 my-5 bg-light" id="products">

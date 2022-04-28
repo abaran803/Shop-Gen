@@ -1,11 +1,10 @@
 import {fetchData} from "../ReduxComponents/CounterSlice";
 
 const URL = process.env.REACT_APP_BACKEND_URL
-console.log(process.env);
 
 export const fetchFromBackend = () => async dispatch => {
     try {
-        const res = await fetch(URL+"/gets-items");
+        const res = await fetch(URL+"/gets-items/O1/U1");
         if (!res.OK) {
             throw new Error("Error Occured");
         }
@@ -20,7 +19,7 @@ export const fetchFromBackend = () => async dispatch => {
 
 const getSiteDataFromBackend = async () => {
     try {
-        const response = await fetch(URL+"/site-data/");
+        const response = await fetch(URL+"/site-data/O1");
         if (!response.ok) {
             throw new Error("Something went wrong");
         }
@@ -32,7 +31,7 @@ const getSiteDataFromBackend = async () => {
 
 const fetchCartFromBackend = async () => {
     try {
-        const response = await fetch(URL+"/get-items/");
+        const response = await fetch(URL+"/get-items/O1/U1");
         if (!response.ok) {
             throw new Error("Something went wrong");
         }
@@ -44,12 +43,13 @@ const fetchCartFromBackend = async () => {
 
 const addNewItemToBackend = async item => {
     try {
-        const response = await fetch(URL+"/add-new/" + item.id, {
+        const selectedItem = {...item, ownerId: 'O1', userId: "U1"};
+        const response = await fetch(URL+"/add-new", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(item)
+            body: JSON.stringify(selectedItem)
         });
         if (!response.ok) {
             throw new Error("Something went wrong");
@@ -62,12 +62,13 @@ const addNewItemToBackend = async item => {
 
 const removeAllFromBackend = async item => {
     try {
-        const response = await fetch(URL+"/remove-all/" + item.id, {
+        const selectedItem = {...item, ownerId: 'O1', userId: "U1"};
+        const response = await fetch(URL+"/remove-all", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(item)
+            body: JSON.stringify(selectedItem)
         });
         if (!response.ok) {
             throw new Error("Something went wrong");
@@ -80,22 +81,22 @@ const removeAllFromBackend = async item => {
 }
 
 const getCategories = async (count) => {
-    const categories = await fetch(`${URL}/${count}`);
+    const categories = await fetch(`${URL}/getCategories/O1/${count}`);
     return categories;
 }
 
 const getProducts = async (count) => {
-    const products = await fetch(`${URL}/someProducts/${count}`);
+    const products = await fetch(`${URL}/getProducts/O1/${count}`);
     return products;
 }
 
 const getProductDetails = async (id) => {
-    const product = await fetch(`${URL}/getSpecificProduct/${id}`)
+    const product = await fetch(`${URL}/getProductDetails/O1/${id}`)
     return product;
 }
 
 const getItemsByCategory = async (category) => {
-    const products = await fetch(`${URL}/getProductsByCategory/${category}`);
+    const products = await fetch(`${URL}/getProductsByCategory/O1/${category}`);
     return products;
 }
 

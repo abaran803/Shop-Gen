@@ -1,19 +1,27 @@
-import React, {Suspense, useEffect} from "react";
+import React, {Suspense, useEffect, useState} from "react";
 import classes from "./Cart.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchFromBackend, fetchFromFirebase, getAllCartData, getSiteData} from "../ReduxComponents/CounterSlice";
+import Loader from "../Components/Loader";
 
 const CartItems = React.lazy(() => import("./CartItems"));
 const TotalCharge = React.lazy(() => import("./TotalCharge"));
 
 const Cart = () => {
+    const [isLoading, setIsLoading] = useState();
     const cartItems = useSelector((state) => state.counter.value);
     const count = cartItems.length;
     // const count = useSelector((state) => state.counter.length);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getAllCartData());
+        const gettingData = async () => {
+            dispatch(getAllCartData(setIsLoading));
+        }
+        gettingData();
     }, [dispatch]);
+    if(isLoading) {
+        return <Loader />
+    }
     return (
         <section className="cart py-5 my-2" id="cart">
             <div className="container">

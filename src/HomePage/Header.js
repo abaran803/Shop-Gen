@@ -8,7 +8,7 @@ const Header = () => {
     const {brandName, navItems} = useSelector(state => state.siteData.data)
 
     return (
-        <section className="header_menu" id="header_menu">
+        <section className="header_menu w-100" id="header_menu" style={{position: "sticky", top: "0", left: "0", zIndex: "99999"}}>
             <div className="container-fluid px-0 shadow">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <Link className="navbar-brand" to="/">

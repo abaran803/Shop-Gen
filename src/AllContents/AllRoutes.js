@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import classes from "./AllRoutes.module.css";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Checkout from "../Pages/Checkout";
+import Loader from "../Components/Loader";
 const About = React.lazy(() => import("../Pages/About"));
 const Cart = React.lazy(() => import("../Pages/Cart"));
 const Category = React.lazy(() => import("../Pages/Category"));
@@ -12,7 +13,7 @@ const MainContent = React.lazy(() => import("../HomePage/MainContent"));
 
 const AllRoutes = () => {
   return (
-    <Suspense fallback={<div className={classes.loading}></div>}>
+    <Suspense fallback={<Loader />}>
       <Switch>
         <Route path="/about">
           <About />
@@ -29,7 +30,7 @@ const AllRoutes = () => {
         <Route path="/product/category/:category" exact>
           <Product />
         </Route>
-        <Route path="/product/:id">
+        <Route path="/product/:id" exact>
           <ProductDetail />
         </Route>
         <Route path="/home">

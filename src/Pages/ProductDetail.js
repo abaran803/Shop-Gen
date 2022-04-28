@@ -4,16 +4,20 @@ import RelatedItems from "./RelatedItems";
 import {addNewCartItem} from "../ReduxComponents/CounterSlice";
 import { useEffect, useState } from "react";
 import { getProductDetails } from "../API/api";
+import Loader from "../Components/Loader";
 
 const ProductDetail = (props) => {
   // const {items} = useSelector(state => state.siteData.data)
   const [item, setItem] = useState();
+  const [isLoading, setIsLoading] = useState();
   const dispatch = useDispatch();
   const pageId = useParams();
   useEffect(() => {
+    setIsLoading(true);
     const getItemDetails = async (id) => {
       const value = await getProductDetails(id);
       const data = await value.json();
+      setIsLoading(false);
       setItem(data);
     }
     getItemDetails(pageId.id);
@@ -22,7 +26,9 @@ const ProductDetail = (props) => {
   // if (ind === -1) {
   //   return <div>Item not found</div>;
   // }
-  console.log();
+  if(isLoading) {
+    return <Loader />
+  }
   if(!item) {
     return <h1>Item not found</h1>
   }

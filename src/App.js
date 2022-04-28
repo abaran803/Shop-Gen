@@ -9,7 +9,7 @@ import {getAllCartData, getSiteData} from "./ReduxComponents/CounterSlice";
 export default function App() {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getAllCartData());
+        // dispatch(getAllCartData());
         dispatch(getSiteData());
     }, []);
     return (

@@ -4,8 +4,11 @@ import {addNewItemToBackend, fetchCartFromBackend, getSiteDataFromBackend, remov
 
 const getAllCartData = createAsyncThunk(
     'item/getData',
-    async () => {
-        return await fetchCartFromBackend();
+    async (callbackFunction) => {
+        callbackFunction(true);
+        const data = await fetchCartFromBackend();
+        callbackFunction(false);
+        return data;
     }
 )
 
