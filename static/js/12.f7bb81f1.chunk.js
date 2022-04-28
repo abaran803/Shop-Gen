@@ -1,2 +1,0 @@
-(this["webpackJsonpe-commerce"]=this["webpackJsonpe-commerce"]||[]).push([[12],{50:function(e,c,s){"use strict";s.r(c);var t=s(0);c.default=function(){return Object(t.jsx)("div",{children:"This is About Page"})}}}]);
-//# sourceMappingURL=12.f7bb81f1.chunk.js.map
