@@ -1,0 +1,1 @@
+{"version":3,"sources":["Pages/Contact.js"],"names":["Contact"],"mappings":"kIAMeA,UANC,WACZ,OACI","file":"static/js/14.8c2fb959.chunk.js","sourcesContent":["const Contact = () => {\r\n    return (\r\n        <div>This is Contact Page</div>\r\n    )\r\n}\r\n\r\nexport default Contact;"],"sourceRoot":""}
