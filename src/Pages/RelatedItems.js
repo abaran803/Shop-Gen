@@ -24,8 +24,8 @@ export default () => {
           <h3>Related Products</h3>
         </div>
         <div className="row mt-5">
-          {items ? items.map((item) => (
-            <div className="col-md-4 col-6">
+          {items ? items.map((item, index) => (
+            <div className="col-md-4 col-6" key={index}>
               <div className="border border-dark rounded shadow text-center p-3 h-100">
                 <div className="mb-4">
                   <img

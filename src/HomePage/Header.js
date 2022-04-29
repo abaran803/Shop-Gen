@@ -13,7 +13,6 @@ const Header = (props) => {
     const handleLogOut = () => { props.setUserLoginStatus(false); }
 
     const loginUserData = JSON.parse(localStorage.getItem('userData'));
-    console.log(loginUserData);
 
     return (
         <section className="header_menu w-100" id="header_menu" style={{ position: "sticky", top: "0", left: "0", zIndex: "99999" }}>

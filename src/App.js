@@ -9,13 +9,12 @@ import LoginForm from "./Pages/LoginForm";
 import { useHistory } from "react-router-dom";
 
 export default function App() {
-    const history = useHistory();
     const dispatch = useDispatch();
-    const [loggedInData, setLoggedInData] = useState();
-    const [userLoggedInData, setUserLoggedInData] = useState();
+    const [loggedInData, setLoggedInData] = useState(false);
+    const [userLoggedInData, setUserLoggedInData] = useState(false);
     useEffect(() => {
-        setLoggedInData(localStorage.getItem('ownerData'));
-        setUserLoggedInData(localStorage.getItem('userData'));
+        setLoggedInData(JSON.parse(localStorage.getItem('ownerData')));
+        setUserLoggedInData(JSON.parse(localStorage.getItem('userData')));
     }, [localStorage]);
     useEffect(() => {
         // dispatch(getAllCartData());
@@ -25,17 +24,19 @@ export default function App() {
         if(val) {
             setLoggedInData(true);
         } else {
-            localStorage.clear('ownerData');
+            localStorage.setItem('ownerData', null);
             setLoggedInData(false);
         }
+        window.location.reload(false);
     }
     const handleUserLoginStatus = (val) => {
         if(val) {
             setUserLoggedInData(true);
         } else {
-            localStorage.clear('userData');
+            localStorage.setItem('userData', null);
             setUserLoggedInData(false);
         }
+        window.location.reload(false);
     }
     return (
         <div>

@@ -10,9 +10,9 @@ const TotalCharge = ({cartItems}) => {
       <div className="pt-4">
         <h5 className="mb-3">Order summary</h5>
         <ul className="list-group list-group-flush">
-          {cartItems.map(item => {
+          {cartItems.map((item, index) => {
             sum += Number(item.price) * Number(item.quantity);
-            return (<li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-2">
+            return (<li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-2" key={index}>
               <span>{item.title.length > 10 ? item.title.slice(0, 10) + "..." : item.title}</span>
               <span>x{item.quantity}</span>
               <span>${Number(item.price) * Number(item.quantity)}</span>

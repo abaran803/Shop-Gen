@@ -5,11 +5,14 @@ import {addNewCartItem} from "../ReduxComponents/CounterSlice";
 import { useEffect, useState } from "react";
 import { getProductDetails } from "../API/api";
 import Loader from "../Components/Loader";
+import { useHistory } from "react-router-dom";
 
 const ProductDetail = (props) => {
   // const {items} = useSelector(state => state.siteData.data)
+  const history = useHistory();
   const [item, setItem] = useState();
   const [isLoading, setIsLoading] = useState();
+  const userLoginStatus = JSON.parse(localStorage.getItem('userData'));
   const dispatch = useDispatch();
   const pageId = useParams();
   useEffect(() => {
@@ -34,7 +37,11 @@ const ProductDetail = (props) => {
   }
   // const selectedItem = items[ind];
   const selectedItem = item;
+  console.log(typeof(userLoginStatus));
   const addToCart = () => {
+    if(!userLoginStatus) {
+      return history.push('/loginUser');
+    }
     const item = selectedItem;
     const newItem = {
       id: item.id,

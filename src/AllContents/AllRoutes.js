@@ -15,8 +15,7 @@ const MainContent = React.lazy(() => import("../HomePage/MainContent"));
 
 const AllRoutes = (props) => {
 
-  const [userLogin, setUserLogin] = useState();
-
+  console.log(props.userLoginStatus)
   return (
     <Suspense fallback={<Loader />}>
       <Switch>
@@ -29,8 +28,8 @@ const AllRoutes = (props) => {
         {props.loginStatus && <Route path="/home"><MainContent /></Route>}
         {props.loginStatus && <Route path="/cart"><Cart /></Route>}
         {props.loginStatus && <Route path="/checkout"><Checkout /></Route>}
-        {props.loginStatus && <Route path="/loginUser">{props.userLoginStatus ? <Redirect to='home' /> : <LoginForm setLoginStatus={props.setUserLoginStatus} userLogin={true} />}</Route>}
-        {props.loginStatus && <Route path="/signupUser">{props.userLoginStatus ? <Redirect to='home' /> : <SignUpForm setLoginStatus={props.setUserLoginStatus} userLogin={true} />}</Route>}
+        {props.loginStatus && <Route path="/loginUser">{props.userLoginStatus ? <Redirect to='/home' /> : <LoginForm setLoginStatus={props.setUserLoginStatus} userLogin={true} />}</Route>}
+        {props.loginStatus && <Route path="/signupUser">{props.userLoginStatus ? <Redirect to='/home' /> : <SignUpForm setLoginStatus={props.setUserLoginStatus} userLogin={true} />}</Route>}
         {props.loginStatus && <Route path="/" exact><Redirect to="/home" /></Route>}
         <Route path="/login">{props.loginStatus ? <Redirect to='/home' /> : <LoginForm setLoginStatus={props.setLoginStatus} />}</Route>
         <Route path="/signup">{props.loginStatus ? <Redirect to='/home' /> : <SignUpForm setLoginStatus={props.setLoginStatus} />}</Route>

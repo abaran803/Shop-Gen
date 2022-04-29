@@ -3,18 +3,24 @@ import classes from "./Cart.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchFromBackend, fetchFromFirebase, getAllCartData, getSiteData} from "../ReduxComponents/CounterSlice";
 import Loader from "../Components/Loader";
+import { useHistory } from "react-router-dom";
 
 const CartItems = React.lazy(() => import("./CartItems"));
 const TotalCharge = React.lazy(() => import("./TotalCharge"));
 
 const Cart = () => {
+    const history = useHistory();
     const [isLoading, setIsLoading] = useState();
     const cartItems = useSelector((state) => state.counter.value);
     const count = cartItems.length;
+    const userLoginStatus = JSON.parse(localStorage.getItem('userData'));
     // const count = useSelector((state) => state.counter.length);
     const dispatch = useDispatch();
     useEffect(() => {
         const gettingData = async () => {
+            if(!userLoginStatus) {
+                return history.push('/loginUser');
+            }
             dispatch(getAllCartData(setIsLoading));
         }
         gettingData();

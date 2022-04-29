@@ -14,7 +14,7 @@ const Product = () => {
   useEffect(() => {
     setIsLoading(true);
     const getItemsByCategoryData = async (category) => {
-      if(!category) {
+      if (!category) {
         const value = await getProducts(50);
         const data = await value.json();
         setIsLoading(false);
@@ -59,7 +59,7 @@ const Product = () => {
                 {categories ? categories.map(category => (
                   <li className="list-group-item" key={category.id}>
                     <Link to={`/product/category/${category.category}`}>{category.category}</Link>
-                    </li>
+                  </li>
                 )) : <Loader />}
               </ul>
             </div>
@@ -95,7 +95,7 @@ const Product = () => {
                   price={item.price}
                   // stars={item.stars}
                   id={item.id}
-                    key={item.id}
+                  key={item.id}
                 />
               )) : <h3 className='w-100 text text-center mt-5'>No data found</h3>}
             </div>

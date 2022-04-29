@@ -1,11 +1,18 @@
 import { Fragment } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {addOneItem, removeAllCartItem, removeOneItem} from "../ReduxComponents/CounterSlice";
 
 const CartItems = (props) => {
+  const history = useHistory();
+  const userLoginStatus = JSON.parse(localStorage.getItem('userData'));
   const dispatch = useDispatch();
   const removeCurrentItem = () => {
+    console.log(!userLoginStatus);
+    if(!userLoginStatus) {
+        return history.push('/loginUser');
+    }
     dispatch(removeAllCartItem(props.item));
   };
   const reduceCurrentItem = () => {
