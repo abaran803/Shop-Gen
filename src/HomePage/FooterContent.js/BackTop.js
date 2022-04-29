@@ -17,7 +17,7 @@ const BackTop = () => {
     };
 
     return (
-        <div className="backtop" style={{position: "fixed", top: "90vh", left: "92vw"}}>
+        <div className="backtop" style={{position: "fixed", top: "90vh", right: "2vw"}}>
             <button
                 id="button"
                 className="btn btn-lg btn-outline-danger"

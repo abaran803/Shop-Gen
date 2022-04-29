@@ -26,7 +26,7 @@ const LoginForm = (props) => {
     const handlePassword = (e) => { setPassword(e.target.value) }
 
     return (
-        <form className='w-25 mx-auto bg bg-light border px-4 py-4 my-5' onSubmit={handleSubmit}>
+        <form className='mx-auto bg bg-light border px-4 py-4 mx-auto my-5' onSubmit={handleSubmit} style={{width: "95%", maxWidth: "320px"}}>
             <div className="form-group">
                 <label htmlFor="exampleInputEmail1">Email address</label>
                 <input type="email" value={mail} onChange={handleMail} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email" />

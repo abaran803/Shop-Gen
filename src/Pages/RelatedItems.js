@@ -25,7 +25,7 @@ export default () => {
         </div>
         <div className="row mt-5">
           {items ? items.map((item, index) => (
-            <div className="col-md-4 col-6" key={index}>
+            <div className="col-md-4 col-sm-6 col-xs-12 mb-3" key={index}>
               <div className="border border-dark rounded shadow text-center p-3 h-100">
                 <div className="mb-4">
                   <img
