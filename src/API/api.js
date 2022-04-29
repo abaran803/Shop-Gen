@@ -2,6 +2,9 @@ import {fetchData} from "../ReduxComponents/CounterSlice";
 
 const URL = process.env.REACT_APP_BACKEND_URL
 
+const userData = localStorage.getItem('userData');
+const ownerData = localStorage.getItem('ownerData');
+
 export const fetchFromBackend = () => async dispatch => {
     try {
         const res = await fetch(URL+"/gets-items/O1/U1");
@@ -100,6 +103,80 @@ const getItemsByCategory = async (category) => {
     return products;
 }
 
+const registerOwner = async (ownerData) => {
+    try {
+        const response = await fetch(URL+"/registerOwner", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(ownerData)
+        });
+        if (!response.ok) {
+            throw new Error("Something went wrong");
+        }
+        return true;
+    } catch (err) {
+        return false;
+    }
+}
+
+const loginOwner = async (ownerData) => {
+    try {
+        const response = await fetch(URL+"/loginOwner", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(ownerData)
+        });
+        if (!response.ok) {
+            throw new Error("Something went wrong");
+        }
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        return false;
+    }
+}
+
+const registerUser = async (userData) => {
+    try {
+        const response = await fetch(URL+"/registerUser", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        });
+        if (!response.ok) {
+            throw new Error("Something went wrong");
+        }
+        return true;
+    } catch (err) {
+        return false;
+    }
+}
+
+const loginUser = async (userData) => {
+    try {
+        const response = await fetch(URL+"/loginUser", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        });
+        if (!response.ok) {
+            throw new Error("Something went wrong");
+        }
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        return false;
+    }
+}
+
 export {
     getSiteDataFromBackend, 
     fetchCartFromBackend, 
@@ -108,5 +185,9 @@ export {
     getCategories,
     getProducts,
     getProductDetails,
-    getItemsByCategory
+    getItemsByCategory,
+    registerOwner,
+    loginOwner,
+    registerUser,
+    loginUser
 }

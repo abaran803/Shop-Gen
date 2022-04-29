@@ -13,7 +13,7 @@ const Checkout = () => {
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="form-group mb-0 mb-lg-4">
-                        <label for="firstName">First Name</label>
+                        <label htmlFor="firstName">First Name</label>
                         <input
                           type="text"
                           className="form-control mb-0 mb-lg-2"
@@ -23,7 +23,7 @@ const Checkout = () => {
                     </div>
                     <div className="col-lg-6">
                       <div className="form-group mb-0 mb-lg-4">
-                        <label for="lastName">Last Name</label>
+                        <label htmlFor="lastName">Last Name</label>
                         <input
                           type="text"
                           className="form-control mb-0 mb-lg-2"
@@ -33,7 +33,7 @@ const Checkout = () => {
                     </div>
                     <div className="col-lg-6">
                       <div className="form-group mb-0 mb-lg-4">
-                        <label for="form18">Phone</label>
+                        <label htmlFor="form18">Phone</label>
                         <input
                           type="number"
                           className="form-control mb-0 mb-lg-2"
@@ -43,7 +43,7 @@ const Checkout = () => {
                     </div>
                     <div className="col-lg-6">
                       <div className="form-group mb-0 mb-lg-4">
-                        <label for="lastName">Email Address</label>
+                        <label htmlFor="lastName">Email Address</label>
                         <input
                           type="email"
                           className="form-control mb-0 mb-lg-2"
@@ -65,7 +65,7 @@ const Checkout = () => {
                       </div>
                     </div>
                     <div className="form-group">
-                      <label for="form14">Address Line 1</label>
+                      <label htmlFor="form14">Address Line 1</label>
                       <input
                         type="text"
                         id="form14"
