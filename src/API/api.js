@@ -1,7 +1,6 @@
 import {fetchData} from "../ReduxComponents/CounterSlice";
 
-// const URL = process.env.REACT_APP_BACKEND_URL
-const URL = "http://localhost:8080"
+const URL = process.env.REACT_APP_BACKEND_URL
 
 const userData = JSON.parse(localStorage.getItem('userData'));
 const ownerData = JSON.parse(localStorage.getItem('ownerData'));
