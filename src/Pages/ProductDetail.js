@@ -12,10 +12,13 @@ const ProductDetail = (props) => {
   const history = useHistory();
   const [item, setItem] = useState();
   const [isLoading, setIsLoading] = useState();
+  const [qty, setQty] = useState();
   const userLoginStatus = JSON.parse(localStorage.getItem('userData'));
   const dispatch = useDispatch();
   const pageId = useParams();
+  const ownerId = JSON.parse(localStorage.getItem('ownerData'))["_id"];
   useEffect(() => {
+    setQty(1);
     setIsLoading(true);
     const getItemDetails = async (id) => {
       const value = await getProductDetails(id);
@@ -37,10 +40,9 @@ const ProductDetail = (props) => {
   }
   // const selectedItem = items[ind];
   const selectedItem = item;
-  console.log(typeof(userLoginStatus));
   const addToCart = () => {
     if(!userLoginStatus) {
-      return history.push('/loginUser');
+      return history.push(`/${ownerId}/loginUser`);
     }
     const item = selectedItem;
     const newItem = {
@@ -48,13 +50,18 @@ const ProductDetail = (props) => {
       title: item.title,
       image: item.image,
       price: item.price,
-      quantity: 1,
+      quantity: qty,
       type: item.type,
       color: item.color,
       size: item.size,
     };
     dispatch(addNewCartItem(newItem));
   };
+
+  const handleQuantityChange = (e) => {
+    setQty(e.target.value)
+  }
+
   return (
     <div>
       <div className="product_detail py-5 my-5" id="product_detail">
@@ -177,8 +184,8 @@ const ProductDetail = (props) => {
                           min="0"
                           max="10"
                           name="quantity"
-                          onChange={() => {}}
-                          value="1"
+                          onChange={handleQuantityChange}
+                          value={qty}
                           type="number"
                         />
                       </div>

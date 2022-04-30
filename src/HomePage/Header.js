@@ -8,8 +8,9 @@ const Header = (props) => {
     const history = useHistory();
     const location = useLocation();
     const { brandName, navItems } = useSelector(state => state.siteData.data)
+    const ownerId = JSON.parse(localStorage.getItem('ownerData'))["_id"];
 
-    const handleLogin = () => { history.push('/loginUser'); }
+    const handleLogin = () => { history.push(`/${ownerId}/loginUser`); }
     const handleLogOut = () => { props.setUserLoginStatus(false); }
 
     const loginUserData = JSON.parse(localStorage.getItem('userData'));
@@ -37,7 +38,7 @@ const Header = (props) => {
                         <ul className="navbar-nav mr-auto">
                             {navItems ? navItems.map((item) => (
                                 <li className={`nav-item ${location.pathname === item.address && "active"}`} key={item.name}>
-                                    <Link className="nav-link" to={item.address}>
+                                    <Link className="nav-link" to={`/${ownerId}${item.address}`}>
                                         {item.name}<span className="sr-only">(current)</span>
                                     </Link>
                                 </li>

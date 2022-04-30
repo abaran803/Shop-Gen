@@ -15,6 +15,7 @@ export default function App() {
     useEffect(() => {
         setLoggedInData(JSON.parse(localStorage.getItem('ownerData')));
         setUserLoggedInData(JSON.parse(localStorage.getItem('userData')));
+        console.log(JSON.parse(localStorage.getItem('ownerData')));
     }, [localStorage]);
     useEffect(() => {
         // dispatch(getAllCartData());
@@ -41,7 +42,7 @@ export default function App() {
     return (
         <div>
             {loggedInData && <Header setUserLoginStatus={handleUserLoginStatus} />}
-            <AllRoutes loginStatus={loggedInData} userLoginStatus={userLoggedInData} setLoginStatus={handleLoginStatus} setUserLoginStatus={handleUserLoginStatus} />
+            <AllRoutes loginStatus={loggedInData || JSON.parse(localStorage.getItem('ownerData'))} userLoginStatus={userLoggedInData} setLoginStatus={handleLoginStatus} setUserLoginStatus={handleUserLoginStatus} />
             {loggedInData && <Footer/>}
         </div>
     );

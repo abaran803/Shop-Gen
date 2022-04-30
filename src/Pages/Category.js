@@ -6,6 +6,7 @@ import Loader from "../Components/Loader";
 
 const Category = () => {
 
+    const ownerId = JSON.parse(localStorage.getItem('ownerData'))["_id"];
     // const categories = useSelector(state => state.siteData.data.categoriesPageData);
     const [categories, setCategories] = useState();
     const [isLoading, setIsLoading] = useState();
@@ -36,7 +37,7 @@ const Category = () => {
                         <div className="col-md-4 mb-4 col-12" key={category.id}>
                             <div className="single_product shadow text-center p-3" style={{ height: "100%" }}>
                                 <div className="product_img">
-                                    <Link to={`/product/category/${category.category}`}>
+                                    <Link to={`/${ownerId}/product/category/${category.category}`}>
                                         <img
                                             src={category.image}
                                             alt=""

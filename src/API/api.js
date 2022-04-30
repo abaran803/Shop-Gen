@@ -1,9 +1,11 @@
 import {fetchData} from "../ReduxComponents/CounterSlice";
 
-const URL = process.env.REACT_APP_BACKEND_URL
+// const URL = process.env.REACT_APP_BACKEND_URL
+const URL = "http://localhost:8080"
 
 const userData = JSON.parse(localStorage.getItem('userData'));
 const ownerData = JSON.parse(localStorage.getItem('ownerData'));
+const ownerId = ownerData ? JSON.parse(localStorage.getItem('ownerData'))["_id"] : null;
 
 export const fetchFromBackend = () => async dispatch => {
     try {
@@ -12,11 +14,9 @@ export const fetchFromBackend = () => async dispatch => {
             throw new Error("Error Occured");
         }
         const data = await res.json();
-        console.log(data)
         dispatch(fetchData({value: data, length: data.length}));
     } catch (err) {
         dispatch(fetchData({value: [], length: 0}));
-        console.log("sdfc")
     }
 }
 
@@ -59,6 +59,26 @@ const addNewItemToBackend = async item => {
         }
         return true;
     } catch (err) {
+        return false;
+    }
+}
+
+const removeOneFromBackend = async item => {
+    try {
+        const selectedItem = {...item, ownerId: ownerData["_id"], userId: userData["_id"]};
+        const response = await fetch(URL+"/remove-one", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(selectedItem)
+        });
+        if (!response.ok) {
+            throw new Error("Something went wrong");
+        }
+        return await response.json();
+    } catch
+        (err) {
         return false;
     }
 }
@@ -147,7 +167,7 @@ const registerUser = async (userData) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(userData)
+            body: JSON.stringify({...userData, ownerId})
         });
         if (!response.ok) {
             throw new Error("Something went wrong");
@@ -181,6 +201,7 @@ export {
     getSiteDataFromBackend, 
     fetchCartFromBackend, 
     addNewItemToBackend, 
+    removeOneFromBackend,
     removeAllFromBackend,
     getCategories,
     getProducts,

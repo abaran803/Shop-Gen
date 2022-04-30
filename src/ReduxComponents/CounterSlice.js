@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {addNewItemToBackend, fetchCartFromBackend, getSiteDataFromBackend, removeAllFromBackend} from "../API/api";
+import {addNewItemToBackend, fetchCartFromBackend, getSiteDataFromBackend, removeAllFromBackend, removeOneFromBackend} from "../API/api";
 
 const getAllCartData = createAsyncThunk(
     'item/getData',
@@ -16,6 +16,13 @@ const addNewCartItem = createAsyncThunk(
     'item/add',
     async (item) => {
         return await addNewItemToBackend(item)
+    }
+)
+
+const removeOneCartItem = createAsyncThunk(
+    'items/removeone',
+    async (item) => {
+        return await removeOneFromBackend(item)
     }
 )
 
@@ -78,12 +85,10 @@ export const counterSlice = createSlice({
             if (ind !== -1) {
                 const selectedItem = state.value[ind];
                 selectedItem.quantity++;
-                console.log("dddd")
                 return;
             }
             const item = action.payload;
             state.value.push(item);
-            console.log("dcv")
             // const sendingData = async () => {
             //     await fetch(
             //         "http://localhost:3001/add-item",
@@ -106,8 +111,26 @@ export const counterSlice = createSlice({
     },
     extraReducers: (builder) => {
 
+        builder.addCase(removeOneCartItem.fulfilled, (state, action) => {
+            if (action.payload) {
+                const id = action.meta.arg.id;
+                const ind = state.value.findIndex(
+                    (item) => item.id === id
+                );
+                if (ind === -1) {
+                    return;
+                }
+                if(state.value[ind].quantity > 1) {
+                    const selectedItem = state.value[ind];
+                    selectedItem.quantity--;
+                    return;
+                }
+                state.value = state.value.filter(item => item.id !== id);
+            }
+            alert("Some error occured")
+        })
+
         builder.addCase(removeAllCartItem.fulfilled, (state, action) => {
-            console.log(action.payload)
             if (action.payload) {
                 const id = action.meta.arg.id;
                 const ind = state.value.findIndex(
@@ -122,7 +145,6 @@ export const counterSlice = createSlice({
 
         builder.addCase(addNewCartItem.fulfilled, (state, action) => {
             const id = action.meta.arg.id;
-            console.log(action.meta.arg);
             if (action.payload) {
                 const ind = state.value.findIndex(
                     (item) => item.id === id
@@ -133,7 +155,10 @@ export const counterSlice = createSlice({
                     return;
                 }
                 const item = action.meta.arg;
+                alert("Item added successfully")
                 state.value.push(item);
+            } else {
+                alert("Some error occured!!! Please try again")
             }
         })
 
@@ -152,7 +177,6 @@ const siteData = createSlice({
     extraReducers: (builder) => {
 
         builder.addCase(getSiteData.fulfilled, (state, action) => {
-            console.log(action.payload.data)
             if (action.payload) {
                 state.data = action.payload.data;
             }
@@ -164,4 +188,4 @@ export const {removeOneItem, addOneItem, fetchData} =
     counterSlice.actions;
 
 export default counterSlice.reducer;
-export {siteData, getSiteData, getAllCartData, addNewCartItem, removeAllCartItem};
+export {siteData, getSiteData, getAllCartData, addNewCartItem, removeAllCartItem, removeOneCartItem};

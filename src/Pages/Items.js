@@ -3,11 +3,15 @@ import {Link} from "react-router-dom";
 import {Fragment} from "react";
 
 const Items = (props) => {
+
+    const ownerId = JSON.parse(localStorage.getItem('ownerData'))["_id"];
+    console.log(props.id)
+
     return (
         <div className="col-md-4 col-12 mb-4">
             <div className="single_product shadow text-center p-3" style={{height: "100%"}}>
                 <div className="product_img">
-                    <Link to={"/product/" + props.id}>
+                    <Link to={`/${ownerId}/product/${props.id}`}>
                         <img
                             src={props.image}
                             className={`img img-fluid ${classes.imageOrientation}`}
@@ -27,7 +31,7 @@ const Items = (props) => {
                         </Fragment>
                     }
                     <h5>
-                        <Link to={"/product/" + props.id}>{props.title}</Link>
+                        <Link to={`/${ownerId}/product/${props.id}`}>{props.title}</Link>
                     </h5>
                     <div className="price">
                         <b>

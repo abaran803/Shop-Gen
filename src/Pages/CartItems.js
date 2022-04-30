@@ -2,24 +2,26 @@ import { Fragment } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import {addOneItem, removeAllCartItem, removeOneItem} from "../ReduxComponents/CounterSlice";
+import {addNewCartItem, addOneItem, removeAllCartItem, removeOneCartItem, removeOneItem} from "../ReduxComponents/CounterSlice";
 
 const CartItems = (props) => {
   const history = useHistory();
   const userLoginStatus = JSON.parse(localStorage.getItem('userData'));
+  const ownerId = JSON.parse(localStorage.getItem('ownerData'))["_id"];
   const dispatch = useDispatch();
   const removeCurrentItem = () => {
-    console.log(!userLoginStatus);
     if(!userLoginStatus) {
-        return history.push('/loginUser');
+        return history.push(`/${ownerId}/loginUser`);
     }
     dispatch(removeAllCartItem(props.item));
   };
   const reduceCurrentItem = () => {
-    dispatch(removeOneItem(props.item));
+    // dispatch(removeOneItem(props.item));
+    dispatch(removeOneCartItem(props.item));
   };
   const addCurrentItem = () => {
-    dispatch(addOneItem(props.item));
+    // dispatch(addOneItem(props.item));
+    dispatch(addNewCartItem(props.item));
   };
   return (
     <Fragment>
@@ -38,7 +40,8 @@ const CartItems = (props) => {
             <div className="d-flex justify-content-between">
               <div>
                 <h5>{props.item.title}</h5>
-                <p className="mb-3 text-muted text-uppercase small">
+                {console.log(props.item)}
+                {/* <p className="mb-3 text-muted text-uppercase small">
                   {props.item.type}
                 </p>
                 <p className="mb-3 text-muted text-uppercase small">
@@ -46,7 +49,7 @@ const CartItems = (props) => {
                 </p>
                 <p className="mb-3 text-muted text-uppercase small">
                   Size: {props.item.size}
-                </p>
+                </p> */}
               </div>
               <div>
                 <div className="mb-0 w-100 d-flex justify-content-around">
@@ -71,7 +74,7 @@ const CartItems = (props) => {
             <div className="d-flex justify-content-between align-item-center">
               <div>
                 <Link
-                  to="/cart"
+                  to={`/${ownerId}/cart`}
                   type="button"
                   className="small text-uppercase mr-3"
                   onClick={removeCurrentItem}

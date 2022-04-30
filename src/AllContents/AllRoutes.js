@@ -14,25 +14,23 @@ const ProductDetail = React.lazy(() => import("../Pages/ProductDetail"));
 const MainContent = React.lazy(() => import("../HomePage/MainContent"));
 
 const AllRoutes = (props) => {
-
-  console.log(props.userLoginStatus)
   return (
     <Suspense fallback={<Loader />}>
       <Switch>
-        {props.loginStatus && <Route path="/about"><About /></Route>}
-        {props.loginStatus && <Route path="/contact"><Contact /></Route>}
-        {props.loginStatus && <Route path="/category"><Category /></Route>}
-        {props.loginStatus && <Route path="/product" exact><Product /></Route>}
-        {props.loginStatus && <Route path="/product/category/:category" exact><Product /></Route>}
-        {props.loginStatus && <Route path="/product/:id" exact><ProductDetail /></Route>}
-        {props.loginStatus && <Route path="/home"><MainContent /></Route>}
-        {props.loginStatus && <Route path="/cart"><Cart /></Route>}
-        {props.loginStatus && <Route path="/checkout"><Checkout /></Route>}
-        {props.loginStatus && <Route path="/loginUser">{props.userLoginStatus ? <Redirect to='/home' /> : <LoginForm setLoginStatus={props.setUserLoginStatus} userLogin={true} />}</Route>}
-        {props.loginStatus && <Route path="/signupUser">{props.userLoginStatus ? <Redirect to='/home' /> : <SignUpForm setLoginStatus={props.setUserLoginStatus} userLogin={true} />}</Route>}
-        {props.loginStatus && <Route path="/" exact><Redirect to="/home" /></Route>}
-        <Route path="/login">{props.loginStatus ? <Redirect to='/home' /> : <LoginForm setLoginStatus={props.setLoginStatus} />}</Route>
-        <Route path="/signup">{props.loginStatus ? <Redirect to='/home' /> : <SignUpForm setLoginStatus={props.setLoginStatus} />}</Route>
+        {props.loginStatus && <Route path={`/${props.loginStatus["_id"]}/about`}><About /></Route>}
+        {props.loginStatus && <Route path={`/${props.loginStatus["_id"]}/contact`}><Contact /></Route>}
+        {props.loginStatus && <Route path={`/${props.loginStatus["_id"]}/category`}><Category /></Route>}
+        {props.loginStatus && <Route path={`/${props.loginStatus["_id"]}/product`} exact><Product /></Route>}
+        {props.loginStatus && <Route path={`/${props.loginStatus["_id"]}/product/category/:category`} exact><Product /></Route>}
+        {props.loginStatus && <Route path={`/${props.loginStatus["_id"]}/product/:id`} exact><ProductDetail /></Route>}
+        {props.loginStatus && <Route path={`/${props.loginStatus["_id"]}/home`}><MainContent /></Route>}
+        {props.loginStatus && <Route path={`/${props.loginStatus["_id"]}/cart`}><Cart /></Route>}
+        {props.loginStatus && <Route path={`/${props.loginStatus["_id"]}/checkout`}><Checkout /></Route>}
+        {props.loginStatus && <Route path={`/${props.loginStatus["_id"]}/loginUser`}>{props.userLoginStatus ? <Redirect to={`/${props.loginStatus["_id"]}/home`} /> : <LoginForm setLoginStatus={props.setUserLoginStatus} userLogin={true} />}</Route>}
+        {props.loginStatus && <Route path={`/${props.loginStatus["_id"]}/signupUser`}>{props.userLoginStatus ? <Redirect to={`/${props.loginStatus["_id"]}/home`} /> : <SignUpForm setLoginStatus={props.setUserLoginStatus} userLogin={true} />}</Route>}
+        {props.loginStatus && <Route path={`/`} exact><Redirect to={`/${props.loginStatus["_id"]}/home`} /></Route>}
+        <Route path="/login">{props.loginStatus ? <Redirect to={`/${JSON.parse(localStorage.getItem('ownerData'))["_id"]}/home`} /> : <LoginForm setLoginStatus={props.setLoginStatus} />}</Route>
+        <Route path="/signup">{props.loginStatus ? <Redirect to={`/${JSON.parse(localStorage.getItem('ownerData'))["_id"]}/home`} /> : <SignUpForm setLoginStatus={props.setLoginStatus} />}</Route>
         {!props.loginStatus && (
           <Switch>
             <Route path="/signup" exact>

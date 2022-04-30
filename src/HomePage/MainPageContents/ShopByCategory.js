@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 
 const ShopByCategory = (props) => {
-  console.log(props);
+
+  const ownerId = JSON.parse(localStorage.getItem('ownerData'))["_id"];
+
   return (
     <div className="col-md-4 col-12">
       <div className="card text-white p-4">
-        <Link to={`/product/category/${props.name}`}>
+        <Link to={`/${ownerId}/product/category/${props.name}`}>
           <img
             className="card-img img img-fluid"
             src={props.image}

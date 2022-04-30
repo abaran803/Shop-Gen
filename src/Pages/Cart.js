@@ -14,12 +14,13 @@ const Cart = () => {
     const cartItems = useSelector((state) => state.counter.value);
     const count = cartItems.length;
     const userLoginStatus = JSON.parse(localStorage.getItem('userData'));
+    const ownerId = JSON.parse(localStorage.getItem('ownerData'))["_id"];
     // const count = useSelector((state) => state.counter.length);
     const dispatch = useDispatch();
     useEffect(() => {
         const gettingData = async () => {
             if(!userLoginStatus) {
-                return history.push('/loginUser');
+                return history.push(`/${ownerId}/loginUser`);
             }
             dispatch(getAllCartData(setIsLoading));
         }

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const TotalCharge = ({cartItems}) => {
 
   let sum = 0;
-  console.log(cartItems);
+  const ownerId = JSON.parse(localStorage.getItem('ownerData'))["_id"];
 
   return (
     <div className="mb-3">
@@ -29,7 +29,7 @@ const TotalCharge = ({cartItems}) => {
             </span>
           </li>
         </ul>
-        <Link to="/checkout" className="btn btn-primary btn-block">
+        <Link to={`/${ownerId}/checkout`} className="btn btn-primary btn-block">
           Go to Checkout
         </Link>
       </div>

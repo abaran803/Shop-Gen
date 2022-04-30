@@ -11,6 +11,7 @@ const Product = () => {
   const [items, setItems] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [rangeValue, setRangeValue] = useState(500);
+  const ownerId = JSON.parse(localStorage.getItem('ownerData'))["_id"];
   useEffect(() => {
     setIsLoading(true);
     const getItemsByCategoryData = async (category) => {
@@ -42,6 +43,7 @@ const Product = () => {
     setRangeValue(e.target.value);
   };
   const selectedItems = (items ? items.filter((item) => item.price <= rangeValue) : null);
+  console.log(selectedItems);
   return (
     <section className="products py-5 my 5" id="products">
       <div className="container">
@@ -58,7 +60,7 @@ const Product = () => {
               <ul className="list-group">
                 {categories ? categories.map(category => (
                   <li className="list-group-item" key={category.id}>
-                    <Link to={`/product/category/${category.category}`}>{category.category}</Link>
+                    <Link to={`/${ownerId}/product/category/${category.category}`}>{category.category}</Link>
                   </li>
                 )) : <Loader />}
               </ul>
