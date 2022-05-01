@@ -4,7 +4,7 @@ const URL = process.env.REACT_APP_BACKEND_URL
 
 const userData = JSON.parse(localStorage.getItem('userData'));
 const ownerData = JSON.parse(localStorage.getItem('ownerData'));
-const ownerId = ownerData ? JSON.parse(localStorage.getItem('ownerData'))["_id"] : null;
+const ownerId = ownerData ? JSON.parse(localStorage.getItem('ownerData'))["_id"] : {["_id"]: ""};
 
 export const fetchFromBackend = () => async dispatch => {
     try {
@@ -21,7 +21,7 @@ export const fetchFromBackend = () => async dispatch => {
 
 const getSiteDataFromBackend = async () => {
     try {
-        const response = await fetch(`${URL}/site-data/${ownerData["_id"]}`);
+        const response = await fetch(`${URL}/site-data/${ownerId}`);
         if (!response.ok) {
             throw new Error("Something went wrong");
         }
@@ -33,7 +33,7 @@ const getSiteDataFromBackend = async () => {
 
 const fetchCartFromBackend = async () => {
     try {
-        const response = await fetch(`${URL}/get-items/${ownerData["_id"]}/${userData["_id"]}`);
+        const response = await fetch(`${URL}/get-items/${ownerId}/${userData["_id"]}`);
         if (!response.ok) {
             throw new Error("Something went wrong");
         }
@@ -45,7 +45,7 @@ const fetchCartFromBackend = async () => {
 
 const addNewItemToBackend = async item => {
     try {
-        const selectedItem = {...item, ownerId: ownerData["_id"], userId: userData["_id"]};
+        const selectedItem = {...item, ownerId: ownerId, userId: userData["_id"]};
         const response = await fetch(URL+"/add-new", {
             method: 'POST',
             headers: {
@@ -64,7 +64,7 @@ const addNewItemToBackend = async item => {
 
 const removeOneFromBackend = async item => {
     try {
-        const selectedItem = {...item, ownerId: ownerData["_id"], userId: userData["_id"]};
+        const selectedItem = {...item, ownerId: ownerId, userId: userData["_id"]};
         const response = await fetch(URL+"/remove-one", {
             method: 'POST',
             headers: {
@@ -84,7 +84,7 @@ const removeOneFromBackend = async item => {
 
 const removeAllFromBackend = async item => {
     try {
-        const selectedItem = {...item, ownerId: ownerData["_id"], userId: userData["_id"]};
+        const selectedItem = {...item, ownerId: ownerId, userId: userData["_id"]};
         const response = await fetch(URL+"/remove-all", {
             method: 'POST',
             headers: {
@@ -103,22 +103,22 @@ const removeAllFromBackend = async item => {
 }
 
 const getCategories = async (count) => {
-    const categories = await fetch(`${URL}/getCategories/${ownerData["_id"]}/${count}`);
+    const categories = await fetch(`${URL}/getCategories/${ownerId}/${count}`);
     return categories;
 }
 
 const getProducts = async (count) => {
-    const products = await fetch(`${URL}/getProducts/${ownerData["_id"]}/${count}`);
+    const products = await fetch(`${URL}/getProducts/${ownerId}/${count}`);
     return products;
 }
 
 const getProductDetails = async (id) => {
-    const product = await fetch(`${URL}/getProductDetails/${ownerData["_id"]}/${id}`)
+    const product = await fetch(`${URL}/getProductDetails/${ownerId}/${id}`)
     return product;
 }
 
 const getItemsByCategory = async (category) => {
-    const products = await fetch(`${URL}/getProductsByCategory/${ownerData["_id"]}/${category}`);
+    const products = await fetch(`${URL}/getProductsByCategory/${ownerId}/${category}`);
     return products;
 }
 

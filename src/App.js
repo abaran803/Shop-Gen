@@ -6,12 +6,31 @@ import Header from "./HomePage/Header";
 import {useDispatch} from "react-redux";
 import {getAllCartData, getSiteData} from "./ReduxComponents/CounterSlice";
 import LoginForm from "./Pages/LoginForm";
-import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function App() {
     const dispatch = useDispatch();
     const [loggedInData, setLoggedInData] = useState(false);
     const [userLoggedInData, setUserLoggedInData] = useState(false);
+
+
+
+
+    
+  const URL = useLocation();
+  const getString = (str) => {
+    let i = 1;
+    let id = '';
+    while(i < str.length && str[i] != '/') id += (str[i++]);
+    return id;
+  }
+  localStorage.setItem('ownerData', JSON.stringify({["_id"]: getString(URL.pathname)}));
+
+
+
+
+
+
     useEffect(() => {
         setLoggedInData(JSON.parse(localStorage.getItem('ownerData')));
         setUserLoggedInData(JSON.parse(localStorage.getItem('userData')));
@@ -42,7 +61,7 @@ export default function App() {
     return (
         <div>
             {loggedInData && <Header setUserLoginStatus={handleUserLoginStatus} />}
-            <AllRoutes loginStatus={loggedInData || JSON.parse(localStorage.getItem('ownerData'))} userLoginStatus={userLoggedInData} setLoginStatus={handleLoginStatus} setUserLoginStatus={handleUserLoginStatus} />
+            <AllRoutes loginStatus={loggedInData || getString(URL.pathname)} userLoginStatus={userLoggedInData} setLoginStatus={handleLoginStatus} setUserLoginStatus={handleUserLoginStatus} />
             {loggedInData && <Footer/>}
         </div>
     );
