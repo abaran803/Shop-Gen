@@ -19,7 +19,7 @@ export default function App() {
     // Check if store exist
     useEffect(() => {
         setStoreStatus('verifying');
-        fetch(`http://localhost:8080/storeCheck/${storeId}`)
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/storeCheck/${storeId}`)
             .then(res => {
                 console.log(res);
                 if (!res.ok) {
