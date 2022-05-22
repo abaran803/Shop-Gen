@@ -16,14 +16,14 @@ const Footer = () => {
 
   return (
     <Fragment>
-      <section className="footer_section pt-5 pb-2" id="footer_section">
+      <section className="footer_section pt-5 pb-2 mx-5" id="footer_section">
         <footer>
           <div className="container-fluid">
             <div className="row">
-              <FooterDescription />
               {footerSection ? footerSection.map((item) => (
                 <FooterSection name={item.name} items={item.items} key={item.name} />
               )) : <h3 className='w-100 text text-center mt-5'>No data found</h3>}
+              <FooterDescription />
             </div>
           </div>
           <CopyRight />

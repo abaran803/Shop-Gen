@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom'
 import { registerOwner, registerUser } from '../API/api';
 
@@ -11,7 +12,7 @@ const SignUpForm = (props) => {
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
     const ownerData = JSON.parse(localStorage.getItem('ownerData'));
-    const ownerId = ownerData ? ownerData["_id"] : null;
+    const storeId = useSelector(state => state.storeId.id);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,7 +22,7 @@ const SignUpForm = (props) => {
             return "Data not Found, some error occured";
         }
         history.push({
-            pathname: props.userLogin ? `/${ownerId}/loginUser` : "/login",
+            pathname: props.userLogin ? `/${storeId}/loginUser` : "/login",
             state: { status: props.userLogin ? 'Signed Up Successfully!!! Login Here' : 'Shop Account Created Successfully!!! Go to Store' }
         });
     }
@@ -47,7 +48,7 @@ const SignUpForm = (props) => {
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control" id="exampleInputPassword1" placeholder="Password" />
             </div>
             <button type="submit" className="btn btn-primary">Sign Up</button>
-            <div className='mt-2' style={{ fontSize: "0.8rem" }}>Already a member! <Link to={props.userLogin ? `/${ownerId}/loginUser` : "/login"}>Login</Link></div>
+            <div className='mt-2' style={{ fontSize: "0.8rem" }}>Already a member! <Link to={props.userLogin ? `/${storeId}/loginUser` : "/login"}>Login</Link></div>
         </form>
     )
 }

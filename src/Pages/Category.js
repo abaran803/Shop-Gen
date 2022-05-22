@@ -1,29 +1,40 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getCategories } from "../API/api";
 import Loader from "../Components/Loader";
 
 const Category = () => {
 
-    const ownerId = JSON.parse(localStorage.getItem('ownerData'))["_id"];
-    // const categories = useSelector(state => state.siteData.data.categoriesPageData);
+    const storeId = useSelector(state => state.storeId.id);
     const [categories, setCategories] = useState();
-    const [isLoading, setIsLoading] = useState();
+    const [isLoading, setIsLoading] = useState('idle');
 
     useEffect(() => {
-        setIsLoading(true);
-        const getCategoriesData = async (count) => {
-            const value = await getCategories(count);
-            const data = await value.json();
-            setIsLoading(false);
-            setCategories(data);
-        }
-        getCategoriesData(4);
+        setIsLoading('loading');
+        const count = 4;
+        const url = "http://localhost:8080";
+        fetch(`${url}/getCategories/${storeId}/${count}`)
+            .then(res => {
+                if(!res.ok) {
+                    throw Error("Categories not Found");
+                }
+                return res.json();
+            })
+            .then(data => {
+                setCategories(data);
+                setIsLoading('success');
+            })
+            .catch(err => {
+                setIsLoading(err.message)
+            })
     }, [])
 
-    if(isLoading) {
+    if(isLoading === 'loading' || isLoading === 'idle') {
         return <Loader />
+    }
+
+    if(isLoading !== 'success') {
+        return <div>{isLoading}</div>
     }
 
     return (
@@ -37,7 +48,7 @@ const Category = () => {
                         <div className="col-md-4 mb-4 col-12" key={category.id}>
                             <div className="single_product shadow text-center p-3" style={{ height: "100%" }}>
                                 <div className="product_img">
-                                    <Link to={`/${ownerId}/product/category/${category.category}`}>
+                                    <Link to={`/${storeId}/product/category/${category.category}`}>
                                         <img
                                             src={category.image}
                                             alt=""

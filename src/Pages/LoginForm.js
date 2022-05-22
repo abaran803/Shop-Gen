@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import { loginOwner, loginUser, registerOwner } from '../API/api';
+import {useSelector} from "react-redux";
 
 const LoginForm = (props) => {
 
@@ -10,8 +11,7 @@ const LoginForm = (props) => {
     const [password, setPassword] = useState("");
     const [loginSuccess, setLoginSuccess] = useState();
     const [loginError, setLoginError] = useState();
-    const ownerData = JSON.parse(localStorage.getItem('ownerData'));
-    const ownerId = ownerData ? ownerData["_id"] : null;
+    const storeId = useSelector(state => state.storeId.id);
 
     useEffect(() => {
         setLoginSuccess(location.state ? location.state.status : false);
@@ -19,31 +19,23 @@ const LoginForm = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = await (props.userLogin ? loginUser({ mail, password }) : loginOwner({ mail, password }))
+        const data = await loginUser({ mail, password });
         if (!data) {
             setLoginError(true);
             return "Data not Found, some error occured";
         }
-        if (props.userLogin) {
-            localStorage.setItem('userData', JSON.stringify(data));
-        } else {
-            localStorage.setItem('ownerData', JSON.stringify(data));
-        }
+        localStorage.setItem('userData', JSON.stringify(data));
         props.setLoginStatus(true);
     }
 
     const handleDemoLogin = async (e) => {
         e.preventDefault();
-        const data = await (props.userLogin ? loginUser({ mail: process.env.REACT_APP_USER_DEMO_ID, password: process.env.REACT_APP_USER_DEMO_PWD }) : loginOwner({ mail: process.env.REACT_APP_DEMO_ID, password: process.env.REACT_APP_DEMO_PWD }))
+        const data = await loginUser({ mail: process.env.REACT_APP_USER_DEMO_ID, password: process.env.REACT_APP_USER_DEMO_PWD })
         if (!data) {
             setLoginError(true);
             return "Data not Found, some error occured";
         }
-        if (props.userLogin) {
-            localStorage.setItem('userData', JSON.stringify(data));
-        } else {
-            localStorage.setItem('ownerData', JSON.stringify(data));
-        }
+        localStorage.setItem('userData', JSON.stringify(data));
         props.setLoginStatus(true);
     }
 
@@ -75,7 +67,7 @@ const LoginForm = (props) => {
             </div>
             <button type="submit" className="btn btn-primary">Login</button>
             <button type="submit" className="btn btn-success mx-2" onClick={handleDemoLogin}>Demo Login</button>
-            <div className='mt-2' style={{ fontSize: "0.8rem" }}>Not a {props.userLogin ? 'user' : 'member'}! <Link to={props.userLogin ? `/${ownerId}/signupUser` : "/signup"}>Sign Up</Link></div>
+            <div className='mt-2' style={{ fontSize: "0.8rem" }}>Not a user<Link to={props.userLogin ? `/${storeId}/signupUser` : "/signup"}>Sign Up</Link></div>
         </form>
     )
 }

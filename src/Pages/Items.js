@@ -1,17 +1,17 @@
 import classes from "./Items.module.css";
 import {Link} from "react-router-dom";
 import {Fragment} from "react";
+import {useSelector} from "react-redux";
 
 const Items = (props) => {
 
-    const ownerId = JSON.parse(localStorage.getItem('ownerData'))["_id"];
-    console.log(props.id)
+    const storeId = useSelector(state => state.storeId.id);
 
     return (
         <div className="col-md-4 col-12 mb-4">
             <div className="single_product shadow text-center p-3" style={{height: "100%"}}>
                 <div className="product_img">
-                    <Link to={`/${ownerId}/product/${props.id}`}>
+                    <Link to={`/${storeId}/product/${props.id}`}>
                         <img
                             src={props.image}
                             className={`img img-fluid ${classes.imageOrientation}`}
@@ -31,7 +31,7 @@ const Items = (props) => {
                         </Fragment>
                     }
                     <h5>
-                        <Link to={`/${ownerId}/product/${props.id}`}>{props.title}</Link>
+                        <Link to={`/${storeId}/product/${props.id}`}>{props.title}</Link>
                     </h5>
                     <div className="price">
                         <b>

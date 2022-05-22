@@ -1,56 +1,47 @@
 import React, {useEffect, useState} from "react";
 import AllRoutes from "./AllContents/AllRoutes";
-import {fetchFromBackend} from "./API/api";
 import Footer from "./HomePage/Footer";
 import Header from "./HomePage/Header";
 import {useDispatch} from "react-redux";
-import {getAllCartData, getSiteData} from "./ReduxComponents/CounterSlice";
-import LoginForm from "./Pages/LoginForm";
-import { useLocation } from "react-router-dom";
+import {getSiteData, updateKey} from "./ReduxComponents/CounterSlice";
+import {useLocation} from "react-router-dom";
+import StoreNotFound from "./Pages/ErrorPages/StoreNotFound";
 
 export default function App() {
     const dispatch = useDispatch();
-    const [loggedInData, setLoggedInData] = useState(false);
+    const [storeStatus, setStoreStatus] = useState('idle');
     const [userLoggedInData, setUserLoggedInData] = useState(false);
 
+    // Getting key from URL
+    const URL = useLocation();
+    const storeId = URL.pathname.substring(1).split('/')[0];
 
-
-
-    
-  const URL = useLocation();
-  const getString = (str) => {
-    let i = 1;
-    let id = '';
-    while(i < str.length && str[i] != '/') id += (str[i++]);
-    return id;
-  }
-  localStorage.setItem('ownerData', JSON.stringify({["_id"]: getString(URL.pathname)}));
-
-
-
-
-
-
+    // Check if store exist
     useEffect(() => {
-        setLoggedInData(JSON.parse(localStorage.getItem('ownerData')));
-        setUserLoggedInData(JSON.parse(localStorage.getItem('userData')));
-        console.log(JSON.parse(localStorage.getItem('ownerData')));
-    }, [localStorage]);
+        setStoreStatus('verifying');
+        fetch(`http://localhost:8080/storeCheck/${storeId}`)
+            .then(res => {
+                console.log(res);
+                if (!res.ok) {
+                    throw Error("Server responds with error!");
+                }
+                return res;
+            })
+            .then(() => {
+                dispatch(updateKey(storeId))
+                return setStoreStatus('verified')
+            })
+            .catch(err => setStoreStatus('not exist'));
+    }, [])
+
+    // Getting site data if store exist
     useEffect(() => {
-        // dispatch(getAllCartData());
         dispatch(getSiteData());
-    }, []);
-    const handleLoginStatus = (val) => {
-        if(val) {
-            setLoggedInData(true);
-        } else {
-            localStorage.setItem('ownerData', null);
-            setLoggedInData(false);
-        }
-        window.location.reload(false);
-    }
+    }, [storeStatus])
+    
+    // Function for user login
     const handleUserLoginStatus = (val) => {
-        if(val) {
+        if (val) {
             setUserLoggedInData(true);
         } else {
             localStorage.setItem('userData', null);
@@ -58,11 +49,11 @@ export default function App() {
         }
         window.location.reload(false);
     }
-    return (
+
+    return (storeStatus === 'verified' ? (
         <div>
-            {loggedInData && <Header setUserLoginStatus={handleUserLoginStatus} />}
-            <AllRoutes loginStatus={loggedInData || getString(URL.pathname)} userLoginStatus={userLoggedInData} setLoginStatus={handleLoginStatus} setUserLoginStatus={handleUserLoginStatus} />
-            {loggedInData && <Footer/>}
-        </div>
-    );
+            <Header setUserLoginStatus={handleUserLoginStatus}/>
+            <AllRoutes userLoginStatus={userLoggedInData} setUserLoginStatus={handleUserLoginStatus}/>
+            <Footer/>
+        </div>) : <StoreNotFound />);
 }
