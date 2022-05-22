@@ -51,7 +51,7 @@ const Product = () => {
     };
     const selectedItems = (items ? items.filter((item) => item.price <= rangeValue) : null);
     
-    if(isLoading === 'loading' || isLoadingCategory === 'loading') {
+    if(isLoading === "loading" && isLoadingCategory === "loading") {
         return <Loader />
     }
 
