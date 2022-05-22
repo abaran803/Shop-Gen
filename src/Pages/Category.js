@@ -12,7 +12,7 @@ const Category = () => {
     useEffect(() => {
         setIsLoading('loading');
         const count = 4;
-        const url = "http://localhost:8080";
+        const url = process.env.REACT_APP_BACKEND_URL;
         fetch(`${url}/getCategories/${storeId}/${count}`)
             .then(res => {
                 if(!res.ok) {

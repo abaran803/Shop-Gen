@@ -19,7 +19,7 @@ const ProductDetail = (props) => {
     useEffect(() => {
         const id = pageId.id;
         setIsLoading('loading');
-        const url = "http://localhost:8080";
+        const url = process.env.REACT_APP_BACKEND_URL;
         fetch(`${url}/getProductDetails/${storeId}/${id}`)
             .then(res => {
                 if (!res.ok) {

@@ -18,7 +18,7 @@ const Product = () => {
     useEffect(() => {
         setIsLoading('loading');
         const count = 50;
-        const url = "http://localhost:8080";
+        const url = process.env.REACT_APP_BACKEND_URL;
         const category = pageCategory.category;
         fetch(`${url}/${!category ? 'getProducts' : 'getProductsByCategory'}/${storeId}/${!category ? count : category}`)
             .then(res => {
