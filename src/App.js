@@ -1,11 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import AllRoutes from "./AllContents/AllRoutes";
 import Footer from "./HomePage/Footer";
 import Header from "./HomePage/Header";
-import {useDispatch} from "react-redux";
-import {getSiteData, updateKey} from "./ReduxComponents/CounterSlice";
-import {useLocation} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getSiteData, updateKey } from "./ReduxComponents/CounterSlice";
+import { useLocation } from "react-router-dom";
 import StoreNotFound from "./Pages/ErrorPages/StoreNotFound";
+import Loader from "./Components/Loader";
 
 export default function App() {
     const dispatch = useDispatch();
@@ -38,7 +39,7 @@ export default function App() {
     useEffect(() => {
         dispatch(getSiteData());
     }, [storeStatus])
-    
+
     // Function for user login
     const handleUserLoginStatus = (val) => {
         if (val) {
@@ -50,10 +51,19 @@ export default function App() {
         window.location.reload(false);
     }
 
+    if (storeStatus === "verifying") {
+        return <div className="vh-100 d-flex align-items-center justify-content-center">
+            <div>
+                <Loader />
+                <div>Loading Data</div>
+            </div>
+        </div>
+    }
+
     return (storeStatus === 'verified' ? (
         <div>
-            <Header setUserLoginStatus={handleUserLoginStatus}/>
-            <AllRoutes userLoginStatus={userLoggedInData} setUserLoginStatus={handleUserLoginStatus}/>
-            <Footer/>
+            <Header setUserLoginStatus={handleUserLoginStatus} />
+            <AllRoutes userLoginStatus={userLoggedInData} setUserLoginStatus={handleUserLoginStatus} />
+            <Footer />
         </div>) : <StoreNotFound />);
 }
