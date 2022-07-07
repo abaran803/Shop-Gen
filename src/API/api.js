@@ -1,15 +1,17 @@
 import {store} from "../ReduxComponents/store";
 import {fetchData} from "../ReduxComponents/CounterSlice";
 
-// const URL = process.env.REACT_APP_BACKEND_URL
+// const URL = 'http://localhost:8080'
 const URL = process.env.REACT_APP_BACKEND_URL
 
 const storeId = window.location.hash.substring(2).split('/')[0];
 const userData = JSON.parse(localStorage.getItem('userData'));
 
 export const fetchFromBackend = () => async dispatch => {
+    const {storeId} = store.getState();
+    console.log(storeId);
     try {
-        const res = await fetch(URL + "/gets-items/O1/U2");
+        const res = await fetch(URL + `/gets-items/${storeId}/${'userId'}`);
         if (!res.OK) {
             throw new Error("Error Occured");
         }

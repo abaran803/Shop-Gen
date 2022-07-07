@@ -22,7 +22,6 @@ export default function App() {
         setStoreStatus('verifying');
         fetch(`${process.env.REACT_APP_BACKEND_URL}/storeCheck/${storeId}`)
             .then(res => {
-                console.log(res);
                 if (!res.ok) {
                     throw Error("Server responds with error!");
                 }
