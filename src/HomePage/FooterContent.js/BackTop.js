@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 const BackTop = () => {
+
+    const [showScroll, setShowScroll] = useState();
 
     const scrollToTop = () => {
         window.scrollTo({
@@ -9,15 +13,15 @@ const BackTop = () => {
     }
 
     window.onscroll = function () {
-        if (window.pageYOffset >= 500) {
-            document.getElementsByClassName('backtop')[0].style.visibility = "visible"
+        if (window.pageYOffset >= 800) {
+            setShowScroll(true);
         } else {
-            document.getElementsByClassName('backtop')[0].style.visibility = "hidden"
+            setShowScroll(false);
         }
     };
 
     return (
-        <div className="backtop" style={{position: "fixed", top: "90vh", right: "2vw"}}>
+        <div className="backtop" style={{position: "fixed", top: "90vh", right: "2vw", visibility: showScroll ? "visible" : "hidden"}}>
             <button
                 id="button"
                 className="btn btn-lg btn-outline-danger"
