@@ -6,7 +6,7 @@ const ShopByCategory = (props) => {
   const storeId = useSelector(state => state.storeId.id);
 
   return (
-    <div className="col-md-4 col-12">
+    <div className="col-md-4 col-12 mb-3">
       <div className="card text-white p-4">
         <Link to={`/${storeId}/product/category/${props.name}`}>
           <img

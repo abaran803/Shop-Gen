@@ -47,19 +47,19 @@ const MainContent = () => {
 
   return (
     <div>
-      <div className="header_carousel" id="header_carousel">
+      <div className="header_carousel vh-100" id="header_carousel">
         <div
           id="carouselExampleControls"
-          className="carousel slide"
+          className="carousel h-100 slide"
           data-ride="carousel"
         >
-          <div className="carousel-inner">
-            <div className="carousel-item active">
+          <div className="carousel-inner h-100">
+            <div className="carousel-item h-100 active">
               <img
                 src="https://images.pexels.com/photos/325876/pexels-photo-325876.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                 className="d-block w-100"
                 alt="..."
-                style={{height: "95vh"}}
+                style={{height: "100%"}}
               />
             </div>
             <div className="carousel-item">

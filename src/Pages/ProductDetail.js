@@ -155,7 +155,7 @@ const ProductDetail = (props) => {
                         <div className="col-md-6">
                             <div className="row">
                                 <div className="col-md-12">
-                                    <div className="title mb-4">
+                                    <div className="title my-4">
                                         <h3>{selectedItem.title}</h3>
                                     </div>
                                     <div className="category mb-4">

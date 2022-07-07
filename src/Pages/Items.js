@@ -10,13 +10,13 @@ const Items = (props) => {
     return (
         <div className="col-md-4 col-12 mb-4">
             <div className="single_product shadow text-center p-3" style={{height: "100%"}}>
-                <div className="product_img">
+                <div className="product_img d-flex align-items-center justify-content-center" style={{height: "70%"}}>
                     <Link to={`/${storeId}/product/${props.id}`}>
                         <img
                             src={props.image}
                             className={`img img-fluid ${classes.imageOrientation}`}
                             alt=""
-                            style={{height: "250px"}}
+                            style={{height: "100%"}}
                         />
                     </Link>
                 </div>
