@@ -1,14 +1,15 @@
+import {store} from "../ReduxComponents/store";
 import {fetchData} from "../ReduxComponents/CounterSlice";
 
+// const URL = process.env.REACT_APP_BACKEND_URL
 const URL = process.env.REACT_APP_BACKEND_URL
 
+const storeId = window.location.hash.substring(2).split('/')[0];
 const userData = JSON.parse(localStorage.getItem('userData'));
-const ownerData = JSON.parse(localStorage.getItem('ownerData'));
-const ownerId = ownerData ? JSON.parse(localStorage.getItem('ownerData'))["_id"] : {["_id"]: ""};
 
 export const fetchFromBackend = () => async dispatch => {
     try {
-        const res = await fetch(URL+"/gets-items/O1/U2");
+        const res = await fetch(URL + "/gets-items/O1/U2");
         if (!res.OK) {
             throw new Error("Error Occured");
         }
@@ -19,9 +20,30 @@ export const fetchFromBackend = () => async dispatch => {
     }
 }
 
+const storeCheck = async (storeId) => {
+    // try {
+    //     const response = await fetch(`${URL}/storeCheck/${storeId}`);
+    //     if(!response.ok) {
+    //         throw new Error("Store not Exist");
+    //     }
+    //     return response;
+    // } catch(e) {
+    //     return e;
+    // }
+    fetch(`${URL}/storeCheck/${storeId}`)
+        .then(res => {
+            if (res.status >= 400) {
+                throw new Error("Server responds with error!");
+            }
+        })
+        .then(data => console.log(data))
+        .catch(err => err.message);
+}
+
 const getSiteDataFromBackend = async () => {
+    const {storeId} = store.getState();
     try {
-        const response = await fetch(`${URL}/site-data/${ownerId}`);
+        const response = await fetch(`${URL}/site-data/${storeId}`);
         if (!response.ok) {
             throw new Error("Something went wrong");
         }
@@ -33,20 +55,23 @@ const getSiteDataFromBackend = async () => {
 
 const fetchCartFromBackend = async () => {
     try {
-        const response = await fetch(`${URL}/get-items/${ownerId}/${userData["_id"]}`);
+        console.log(`${URL}/get-items/${storeId}/${userData["_id"]}`);
+        const response = await fetch(`${URL}/get-items/${storeId}/${userData["_id"]}`);
         if (!response.ok) {
             throw new Error("Something went wrong");
         }
+        console.log(storeId);
         return await response.json();
     } catch (err) {
+        console.log(storeId);
         return false;
     }
 }
 
 const addNewItemToBackend = async item => {
     try {
-        const selectedItem = {...item, ownerId: ownerId, userId: userData["_id"]};
-        const response = await fetch(URL+"/add-new", {
+        const selectedItem = {...item, storeId, userId: userData["_id"]};
+        const response = await fetch(URL + "/add-new", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -64,8 +89,8 @@ const addNewItemToBackend = async item => {
 
 const removeOneFromBackend = async item => {
     try {
-        const selectedItem = {...item, ownerId: ownerId, userId: userData["_id"]};
-        const response = await fetch(URL+"/remove-one", {
+        const selectedItem = {...item, storeId, userId: userData["_id"]};
+        const response = await fetch(URL + "/remove-one", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -84,8 +109,8 @@ const removeOneFromBackend = async item => {
 
 const removeAllFromBackend = async item => {
     try {
-        const selectedItem = {...item, ownerId: ownerId, userId: userData["_id"]};
-        const response = await fetch(URL+"/remove-all", {
+        const selectedItem = {...item, storeId, userId: userData["_id"]};
+        const response = await fetch(URL + "/remove-all", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -103,28 +128,28 @@ const removeAllFromBackend = async item => {
 }
 
 const getCategories = async (count) => {
-    const categories = await fetch(`${URL}/getCategories/${ownerId}/${count}`);
+    const categories = await fetch(`${URL}/getCategories/${storeId}/${count}`);
     return categories;
 }
 
 const getProducts = async (count) => {
-    const products = await fetch(`${URL}/getProducts/${ownerId}/${count}`);
+    const products = await fetch(`${URL}/getProducts/${storeId}/${count}`);
     return products;
 }
 
 const getProductDetails = async (id) => {
-    const product = await fetch(`${URL}/getProductDetails/${ownerId}/${id}`)
+    const product = await fetch(`${URL}/getProductDetails/${storeId}/${id}`)
     return product;
 }
 
 const getItemsByCategory = async (category) => {
-    const products = await fetch(`${URL}/getProductsByCategory/${ownerId}/${category}`);
+    const products = await fetch(`${URL}/getProductsByCategory/${storeId}/${category}`);
     return products;
 }
 
 const registerOwner = async (ownerData) => {
     try {
-        const response = await fetch(URL+"/registerOwner", {
+        const response = await fetch(URL + "/registerOwner", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -142,7 +167,7 @@ const registerOwner = async (ownerData) => {
 
 const loginOwner = async (ownerData) => {
     try {
-        const response = await fetch(URL+"/loginOwner", {
+        const response = await fetch(URL + "/loginOwner", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -161,12 +186,12 @@ const loginOwner = async (ownerData) => {
 
 const registerUser = async (userData) => {
     try {
-        const response = await fetch(URL+"/registerUser", {
+        const response = await fetch(URL + "/registerUser", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({...userData, ownerId})
+            body: JSON.stringify({...userData, storeId})
         });
         if (!response.ok) {
             throw new Error("Something went wrong");
@@ -179,7 +204,7 @@ const registerUser = async (userData) => {
 
 const loginUser = async (userData) => {
     try {
-        const response = await fetch(URL+"/loginUser", {
+        const response = await fetch(URL + "/loginUser", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -197,9 +222,10 @@ const loginUser = async (userData) => {
 }
 
 export {
-    getSiteDataFromBackend, 
-    fetchCartFromBackend, 
-    addNewItemToBackend, 
+    storeCheck,
+    getSiteDataFromBackend,
+    fetchCartFromBackend,
+    addNewItemToBackend,
     removeOneFromBackend,
     removeAllFromBackend,
     getCategories,

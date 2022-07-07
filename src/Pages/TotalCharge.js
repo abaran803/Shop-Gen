@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const TotalCharge = ({cartItems}) => {
 
   let sum = 0;
-  const ownerId = JSON.parse(localStorage.getItem('ownerData'))["_id"];
+  const storeId = useSelector(state => state.storeId.id);
 
   return (
     <div className="mb-3">
@@ -29,7 +30,7 @@ const TotalCharge = ({cartItems}) => {
             </span>
           </li>
         </ul>
-        <Link to={`/${ownerId}/checkout`} className="btn btn-primary btn-block">
+        <Link to={`/${storeId}/checkout`} className="btn btn-primary btn-block">
           Go to Checkout
         </Link>
       </div>

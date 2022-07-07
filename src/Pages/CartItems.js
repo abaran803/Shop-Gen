@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {addNewCartItem, addOneItem, removeAllCartItem, removeOneCartItem, removeOneItem} from "../ReduxComponents/CounterSlice";
@@ -7,11 +7,11 @@ import {addNewCartItem, addOneItem, removeAllCartItem, removeOneCartItem, remove
 const CartItems = (props) => {
   const history = useHistory();
   const userLoginStatus = JSON.parse(localStorage.getItem('userData'));
-  const ownerId = JSON.parse(localStorage.getItem('ownerData'))["_id"];
+  const storeId = useSelector(state => state.storeId.id);
   const dispatch = useDispatch();
   const removeCurrentItem = () => {
     if(!userLoginStatus) {
-        return history.push(`/${ownerId}/loginUser`);
+        return history.push(`/${storeId}/loginUser`);
     }
     dispatch(removeAllCartItem(props.item));
   };
@@ -40,7 +40,6 @@ const CartItems = (props) => {
             <div className="d-flex justify-content-between">
               <div>
                 <h5>{props.item.title}</h5>
-                {console.log(props.item)}
                 {/* <p className="mb-3 text-muted text-uppercase small">
                   {props.item.type}
                 </p>
@@ -74,7 +73,7 @@ const CartItems = (props) => {
             <div className="d-flex justify-content-between align-item-center">
               <div>
                 <Link
-                  to={`/${ownerId}/cart`}
+                  to={`/${storeId}/cart`}
                   type="button"
                   className="small text-uppercase mr-3"
                   onClick={removeCurrentItem}

@@ -170,6 +170,16 @@ export const counterSlice = createSlice({
     }
 });
 
+const storeId = createSlice({
+    name: "storeId",
+    initialState: {id: ""},
+    reducers: {
+        updateKey: (state, action) => {
+            state.id = action.payload;
+        }
+    }
+})
+
 const siteData = createSlice({
     name: "siteData",
     initialState: siteDataState,
@@ -187,5 +197,8 @@ const siteData = createSlice({
 export const {removeOneItem, addOneItem, fetchData} =
     counterSlice.actions;
 
+export const {updateKey} =
+        storeId.actions;
+
 export default counterSlice.reducer;
-export {siteData, getSiteData, getAllCartData, addNewCartItem, removeAllCartItem, removeOneCartItem};
+export {siteData, storeId, getSiteData, getAllCartData, addNewCartItem, removeAllCartItem, removeOneCartItem};
