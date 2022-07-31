@@ -14,7 +14,9 @@ const Product = () => {
     const [isLoading, setIsLoading] = useState('idle');
     const [isLoadingCategory, setIsLoadingCategory] = useState('idle');
     const [rangeValue, setRangeValue] = useState(500);
+    const [showFilter, setShowFilter] = useState();
     const storeId = useSelector(state => state.storeId.id);
+
     useEffect(() => {
         setIsLoading('loading');
         const count = 50;
@@ -36,6 +38,9 @@ const Product = () => {
             })
     }, [pageCategory])
 
+    useEffect(() => {
+        setShowFilter(window.innerWidth > 600 ? true : false);
+    }, [window])
     useEffect(() => {
         const getCategoriesData = async (count) => {
             setIsLoadingCategory('loading');
@@ -67,8 +72,11 @@ const Product = () => {
                 </div>
                 <div className="row">
                     <div className="col-md-3 border-right mb-small-5">
-                        <h4 className="mb-5 border-bottom">Filters</h4>
-                        <div className="mb-5">
+                        <h4 className="mb-5 border-bottom d-flex justify-content-between">
+                            <div>Filters</div>
+                            <div className="bg bg-secondary m-1 p-1 rounded text-white" onClick={() => setShowFilter(value => !value)} style={{fontSize: "0.9rem", cursor: "pointer"}}>{showFilter ? 'Hide' : 'Show'}</div>
+                        </h4>
+                        <div className={`mb-5 ${!showFilter ? 'd-none' : ''}`}>
                             <label>
                                 <b>Category</b>
                             </label>
@@ -81,7 +89,7 @@ const Product = () => {
                                 )) : <Loader/>}
                             </ul>
                         </div>
-                        <div>
+                        <div className={!showFilter ? 'd-none' : ''}>
                             <form>
                                 <div className="form-group">
                                     <label>

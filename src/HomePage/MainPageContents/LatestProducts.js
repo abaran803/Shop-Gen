@@ -8,7 +8,7 @@ const LatestProducts = (props) => {
     const storeId = useSelector(state => state.storeId.id);
 
     return (
-        <div className="col-md-4 col-12">
+        <div className="col-md-4 col-12 mb-3">
             <div className={`single_product shadow text-center p-4 ${classes.blockSize}`}>
                 <div className="product_img">
                     <Link to={`/${storeId}/product/${props.id}`}>

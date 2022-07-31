@@ -50,9 +50,9 @@ const Header = (props) => {
                                 </li>
                             )) : <h3 className='w-100 text text-center'>No data found</h3>}
                         </ul>
-                        {loginUserData && <h5 className="my-0">Hello, {loginUserData.name}</h5>}
+                        {loginUserData && <h5 className="my-0 mr-2">Hello, {loginUserData.name}</h5>}
                         <button
-                            className={`${loginUserData ? 'bg-danger' : 'bg-success'} text text-light rounded border-0 px-2 py-1 mx-2`}
+                            className={`${loginUserData ? 'bg-danger' : 'bg-success'} text text-light rounded border-0 px-2 py-1`}
                             onClick={loginUserData ? handleLogOut : handleLogin}>{loginUserData ? 'Log Out' : 'Log In'}</button>
                     </div>
                 </nav>

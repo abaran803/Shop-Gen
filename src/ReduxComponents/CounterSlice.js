@@ -36,7 +36,7 @@ const removeAllCartItem = createAsyncThunk(
 const getSiteData = createAsyncThunk(
     'items/getSiteData',
     async (item) => {
-        return await getSiteDataFromBackend();
+        return await getSiteDataFromBackend(item);
     }
 )
 
