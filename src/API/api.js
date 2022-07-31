@@ -42,8 +42,7 @@ const storeCheck = async (storeId) => {
         .catch(err => err.message);
 }
 
-const getSiteDataFromBackend = async () => {
-    const {storeId} = store.getState();
+const getSiteDataFromBackend = async (storeId) => {
     try {
         const response = await fetch(`${URL}/site-data/${storeId}`);
         if (!response.ok) {

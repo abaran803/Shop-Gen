@@ -36,7 +36,7 @@ export default function App() {
 
     // Getting site data if store exist
     useEffect(() => {
-        dispatch(getSiteData());
+        dispatch(getSiteData(storeId));
     }, [storeStatus])
 
     // Function for user login
