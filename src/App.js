@@ -7,6 +7,7 @@ import { getSiteData, updateKey } from "./ReduxComponents/CounterSlice";
 import { useLocation } from "react-router-dom";
 import StoreNotFound from "./Pages/ErrorPages/StoreNotFound";
 import Loader from "./Components/Loader";
+import Home from "./Pages/Home/home";
 
 export default function App() {
     const dispatch = useDispatch();
@@ -48,6 +49,10 @@ export default function App() {
             setUserLoggedInData(false);
         }
         window.location.reload(false);
+    }
+
+    if(URL.pathname === '/') {
+        return <Home />
     }
 
     if (storeStatus === "verifying") {
