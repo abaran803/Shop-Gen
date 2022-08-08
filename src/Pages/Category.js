@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import CustomCards from "../Components/CustomCards";
 import Loader from "../Components/Loader";
 
 const Category = () => {
@@ -46,28 +47,7 @@ const Category = () => {
                 <div className="row mb-5">
                     {categories ? categories.map((category => (
                         <div className="col-md-4 mb-4 col-12" key={category.id}>
-                            <div className="single_product shadow text-center p-3" style={{ height: "100%" }}>
-                                <div className="product_img">
-                                    <Link to={`/${storeId}/product/category/${category.category}`}>
-                                        <img
-                                            src={category.image}
-                                            alt=""
-                                            className="img img-fluid rounded"
-                                            style={{ height: "300px" }}
-                                        />
-                                    </Link>
-                                </div>
-                                <div className="product_caption my-3">
-                                    <h4>
-                                        <a href={category.productLink}>{category.category}</a>
-                                    </h4>
-                                </div>
-                                <div className="mt-3">
-                                    <p>
-                                        {category.description}
-                                    </p>
-                                </div>
-                            </div>
+                            <CustomCards cardImage={category.image} cardTitle={category.category} cardDesc={category.description} cardType={'Category'} itemLink={category.productLink} baseURL={`${storeId}/product/category/${category.category}`} key={category.id} />
                         </div>
                     ))) : <h2 className='w-100 text text-center mt-5'>No data found</h2>}
                 </div>

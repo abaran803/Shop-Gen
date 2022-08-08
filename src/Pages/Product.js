@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {getCategories} from "../API/api";
-import {Link} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getCategories } from "../API/api";
+import { Link } from "react-router-dom";
 import Loader from "../Components/Loader";
-import {useSelector} from "react-redux";
-
-const Items = React.lazy(() => import("./Items"));
+import { useSelector } from "react-redux";
+import CustomCards from "../Components/CustomCards";
 
 const Product = () => {
     const pageCategory = useParams();
@@ -115,14 +114,9 @@ const Product = () => {
                     <div className="col-md-9">
                         <div className="row mb-5">
                             {isLoading === 'success' ? selectedItems.map((item) => (
-                                <Items
-                                    image={item.image}
-                                    title={item.title}
-                                    price={item.price}
-                                    // stars={item.stars}
-                                    id={item.id}
-                                    key={item.id}
-                                />
+                                <div className="col-md-4 col-12 mb-4">
+                                    <CustomCards key={item.id} baseURL={`/${storeId}/product/${item.id}`} cardImage={item.image} itemLink={`/${storeId}/product/${item.id}`} cardTitle={item.title} cardType={'Product'} cardPrice={item.price} />
+                                </div>
                             )) : <Loader />}
                         </div>
                     </div>
