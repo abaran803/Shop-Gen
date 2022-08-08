@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/HomePage/MainPageContents/LatestProducts.module.css"],"names":[],"mappings":"AAAA,wCACI,UAAW,CACX,YAAa,CACb,kBACJ,CAEA,iCACI,WACJ","file":"5.9243c93a.chunk.css","sourcesContent":[".imageOrientation {\r\n    width: 100%;\r\n    height: 400px;\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.blockSize {\r\n    height: 100%;\r\n}"]}
