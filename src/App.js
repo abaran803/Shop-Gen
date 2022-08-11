@@ -8,6 +8,9 @@ import { useLocation } from "react-router-dom";
 import StoreNotFound from "./Pages/ErrorPages/StoreNotFound";
 import Loader from "./Components/Loader";
 import Home from "./Pages/Home/home";
+import ShopGenerator from "./Components/ShopGenerator";
+import GenerateSuccess from "./Components/GenerateSuccess";
+import { Types } from "mongoose";
 
 export default function App() {
     const dispatch = useDispatch();
@@ -17,27 +20,32 @@ export default function App() {
     // Getting key from URL
     const URL = useLocation();
     const storeId = URL.pathname.substring(1).split('/')[0];
+    const isStore = Types.ObjectId.isValid(storeId);
 
     // Check if store exist
     useEffect(() => {
-        setStoreStatus('verifying');
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/storeCheck/${storeId}`)
-            .then(res => {
-                if (!res.ok) {
-                    throw Error("Server responds with error!");
-                }
-                return res;
-            })
-            .then(() => {
-                dispatch(updateKey(storeId))
-                return setStoreStatus('verified')
-            })
-            .catch(err => setStoreStatus('not exist'));
+        if (isStore) {
+            setStoreStatus('verifying');
+            fetch(`${process.env.REACT_APP_BACKEND_URL}/storeCheck/${storeId}`)
+                .then(res => {
+                    if (!res.ok) {
+                        throw Error("Server responds with error!");
+                    }
+                    return res;
+                })
+                .then(() => {
+                    dispatch(updateKey(storeId))
+                    return setStoreStatus('verified')
+                })
+                .catch(err => setStoreStatus('not exist'));
+        }
     }, [])
 
     // Getting site data if store exist
     useEffect(() => {
-        dispatch(getSiteData(storeId));
+        if (isStore) {
+            dispatch(getSiteData(storeId));
+        }
     }, [storeStatus])
 
     // Function for user login
@@ -51,8 +59,16 @@ export default function App() {
         window.location.reload(false);
     }
 
-    if(URL.pathname === '/') {
+    if (URL.pathname === '/' || URL.pathname === '/home') {
         return <Home />
+    }
+
+    if (URL.pathname === '/generate') {
+        return <ShopGenerator />
+    }
+
+    if (URL.pathname === '/generateSuccess') {
+        return <GenerateSuccess />
     }
 
     if (storeStatus === "verifying") {

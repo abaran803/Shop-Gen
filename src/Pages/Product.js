@@ -115,7 +115,7 @@ const Product = () => {
                         <div className="row mb-5">
                             {isLoading === 'success' ? selectedItems.map((item) => (
                                 <div className="col-md-4 col-12 mb-4">
-                                    <CustomCards key={item.id} baseURL={`/${storeId}/product/${item.id}`} cardImage={item.image} itemLink={`/${storeId}/product/${item.id}`} cardTitle={item.title} cardType={'Product'} cardPrice={item.price} />
+                                    <CustomCards key={item.id} baseURL={`${storeId}/product/${item.id}`} cardImage={item.image} itemLink={`/${storeId}/product/${item.id}`} cardTitle={item.title} cardType={'Product'} cardPrice={item.price} />
                                 </div>
                             )) : <Loader />}
                         </div>
