@@ -28,7 +28,7 @@ const Home = () => {
                         <button className={`${classes.submitButton} h-100 bg bg-primary text-white rounded border-none`} onClick={() => gotoStore(enteredId)}>Go To Store</button>
                     </div>
                     <button className={`${classes.submitButton} mx-0 my-2 px-3 py-2 rounded text-white`} style={{ background: "rgba(80, 80, 80, 0.6)" }} disabled>Generate Your Store</button>
-                    <button className={`${classes.submitButton} mx-0 my-1 px-3 py-2 bg bg-success rounded text-white`} onClick={() => gotoStore('62f49bb47290c166540d1c94')}>Demo Shop</button>
+                    <button className={`${classes.submitButton} mx-0 my-1 px-3 py-2 bg bg-success rounded text-white`} onClick={() => gotoStore('62f4a09e50a914801656ac99')}>Demo Shop</button>
                 </div>
             </div>
             <div className={`${classes.errorImage} w-50 vh-100 align-items-center justify-content-center`}>
