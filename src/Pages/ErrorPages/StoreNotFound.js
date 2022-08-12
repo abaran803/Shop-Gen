@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import classes from './StoreNotFound.module.css';
 import logo from '../../assets/LottieFiles/shopIdError.gif';
+import { Link } from 'react-router-dom';
 
 const StoreNotFound = () => {
 
@@ -19,20 +20,22 @@ const StoreNotFound = () => {
 
   return (
     <div className='d-flex vh-100'>
-      <div className={` ${classes.errorText} h-100 d-flex justify-content-center`}>
+      <div className={`${classes.errorText} h-100 d-flex justify-content-center`}>
         <div className='w-75 h-100 d-flex flex-column justify-content-center'>
-          <div className='font-weight-lighter' style={{ fontSize: "2.2rem", lineHeight: "2.4rem" }}>May be, you have missed your shop id :(</div>
+          <div className={`${classes.header} font-weight-lighter`}>May be, you have missed your shop id :(</div>
           <div className='my-3 text-secondary'>We are the platform to create the store for the businesses and provide unique store ID. If you are a customer of any store, please contact to the store owner for the correct ID</div>
           <div className='my-2 d-flex'>
             <input className={classes.inputField} type="text" placeholder='Enter Shop ID' onChange={storeIdHandler} />
             <button className={`${classes.submitButton} h-100 bg bg-primary text-white rounded border-none`} onClick={() => gotoStore(enteredId)}>Go To Store</button>
           </div>
-          <button className={`${classes.submitButton} mx-0 my-2 px-3 py-2 rounded text-white`} style={{ background: "rgba(80, 80, 80, 0.6)" }} disabled>Generate Your Store</button>
-          <button className={`${classes.submitButton} mx-0 my-1 px-3 py-2 bg bg-success rounded text-white`} onClick={() => gotoStore('62f4a09e50a914801656ac99')}>Demo Shop</button>
+          <Link to='/generate'>
+            <button className={`${classes.submitButton} mx-0 my-2 px-3 py-2 rounded text-white bg-success`}>Generate Your Store</button>
+          </Link>
+          <button className={`${classes.submitButton} mx-0 my-1 px-3 py-2 bg bg-info rounded text-white`} onClick={() => gotoStore('62f4a09e50a914801656ac99')}>Demo Shop</button>
         </div>
       </div>
       <div className={`${classes.errorImage} w-50 vh-100 align-items-center justify-content-center`}>
-      <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_mkqmafk2.json" background="transparent" speed="1" style={{width: "100%", height: "100%"}} loop autoplay></lottie-player>
+        <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_mkqmafk2.json" background="transparent" speed="1" style={{ width: "100%", height: "100%" }} loop autoplay></lottie-player>
       </div>
     </div>
   )

@@ -8,6 +8,11 @@
   height: 100%;
 }
 
+.header {
+  font-size: 2.2rem;
+  line-height: 2.4rem;
+}
+
 .inputField {
   height: 100%;
 }
@@ -25,10 +30,15 @@
   .errorText {
     width: 100%;
   }
+  .header {
+    font-size: 1.8rem;
+    line-height: 1;
+  }
   .inputField {
     height: 100%;
   }
   .submitButton {
+    width: 100%;
     padding: 0.2rem;
     margin-left: 0.3rem;
     font-size: 0.8rem;
