@@ -15,7 +15,7 @@ const GenerateSuccess = () => {
                 <div>Brand Name&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp; {location.state.brandName}</div>
                 <div>Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; {location.state.email}</div>
                 <div>Store ID&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; {location.state.storeId}</div>
-                <div>URL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp; <a href={'https://abaran803.github.io/E-Commerce/#/' + location.state.storeId + '/home'} target="_blank">Click Here</a></div>
+                <div>URL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp; <a href={'https://abaran803.github.io/Shop-Gen/#/' + location.state.storeId + '/home'} target="_blank">Click Here</a></div>
                 </div>
             </div>
         )}</div>

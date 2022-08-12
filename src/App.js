@@ -11,6 +11,7 @@ import Home from "./Pages/Home/home";
 import ShopGenerator from "./Components/ShopGenerator";
 import GenerateSuccess from "./Components/GenerateSuccess";
 import { Types } from "mongoose";
+import SampleShop from "./Data/SampleShop";
 
 export default function App() {
     const dispatch = useDispatch();
@@ -69,6 +70,10 @@ export default function App() {
 
     if (URL.pathname === '/generateSuccess') {
         return <GenerateSuccess />
+    }
+
+    if(URL.pathname === '/sample') {
+        return <SampleShop />
     }
 
     if (storeStatus === "verifying") {

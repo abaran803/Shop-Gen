@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import Loader from './Loader';
 
@@ -57,7 +58,7 @@ const ShopGenerator = () => {
 
   return (
     <div className='container'>
-      <ul className='d-flex w-100 justify-content-between mt-3' style={{ listStyleType: "none" }}>
+      <ul className='d-flex w-100 justify-content-between mt-3 p-0' style={{ listStyleType: "none" }}>
         {inputDataMethods.map((item, id) => (
           <li key={id}>
             <button type="button" className={`btn btn${!(selectedMethod === id) ? '-outline' : ''}-primary shadow-none`} onClick={() => setSelectedMethod(id)} key={id}>{item}</button>
@@ -71,8 +72,14 @@ const ShopGenerator = () => {
 
 const jsonData = (handleSubmit, handleChange, storeData) => (
   <form onSubmit={handleSubmit}>
-    <textarea cols="30" rows="10" onChange={handleChange} value={storeData}></textarea>
-    <button type="submit">Submit</button>
+    <textarea className='w-100' onChange={handleChange} value={storeData} style={{ height: "500px", maxHeight: "80vh", resize: "none" }}></textarea>
+    <br />
+    <div>
+      <button type="submit" className="btn btn-success">Generate Shop</button>
+      <Link to="/sample">
+        <button type="button" className="btn btn-info ml-2">Sample Data</button>
+      </Link>
+    </div>
   </form>
 )
 
