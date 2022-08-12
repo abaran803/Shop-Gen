@@ -13,7 +13,7 @@ const LatestProducts = (props) => {
                 itemLink={`/${storeId}/product`}
                 cardType={'Latest'}
                 cardPrice={props.item.price}
-                baseURL={`/${storeId}/product/${props.id}`}
+                baseURL={`${storeId}/product/${props.id}`}
             />
         </div>
     );

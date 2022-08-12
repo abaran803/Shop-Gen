@@ -383,16 +383,31 @@ const SampleShop = () => {
         }
     }
 
+    const copyToClipboard = () => {
+        const textField = document.createElement('textarea');
+        textField.innerText = document.getElementById('sample').textContent;
+        const parentElement = document.getElementById('copyHolder');
+        parentElement.appendChild(textField);
+        textField.select();
+        document.execCommand('copy');
+        parentElement.removeChild(textField);
+        alert("Data Copied")
+    }
+
     return (
         <div className='mx-2'>
             <div className='my-3'>
-                <Link to='/generate' style={{ textDecoration: 'none', color: 'black'}}>
-                    <button type="button" className="btn btn-warning" style={{fontWeight: "600"}}>
+                <Link to='/generate' style={{ textDecoration: 'none', color: 'black' }}>
+                    <button type="button" className="btn btn-warning" style={{ fontWeight: "600" }}>
                         {'< '}Back to Generator
                     </button>
                 </Link>
+                <button type="button" className="btn btn-info ml-2" style={{ fontWeight: "600" }} onClick={copyToClipboard}>
+                    Copy data
+                </button>
             </div>
             <pre id='sample'>{JSON.stringify(shopData, null, 4)}</pre>
+            <div id='copyHolder'></div>
         </div>
     )
 }

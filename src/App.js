@@ -47,7 +47,7 @@ export default function App() {
         if (isStore) {
             dispatch(getSiteData(storeId));
         }
-    }, [storeStatus])
+    }, [])
 
     // Function for user login
     const handleUserLoginStatus = (val) => {

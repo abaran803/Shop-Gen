@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import classes from './StoreNotFound.module.css';
-import logo from '../../assets/LottieFiles/shopIdError.gif';
 import { Link } from 'react-router-dom';
 
 const StoreNotFound = () => {
