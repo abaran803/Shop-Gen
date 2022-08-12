@@ -28,7 +28,7 @@ const ProductDetail = (props) => {
                 return res.json();
             })
             .then(data => {
-                setItem(data);
+                setItem(data.data);
                 setIsLoading('success');
             })
             .catch(err => {

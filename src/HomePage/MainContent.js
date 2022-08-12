@@ -25,7 +25,7 @@ const MainContent = () => {
       const value = await getCategories(count);
       const data = await value.json();
       setIsLoading(false);
-      setCategoryItems(data);
+      setCategoryItems(data.data);
     }
     getCategoriesData(3);
     const getProductsData = async (count) => {
@@ -33,7 +33,7 @@ const MainContent = () => {
       const value = await getProducts(count);
       const data = await value.json();
       setIsLoading(false);
-      setLatestProducts(data);
+      setLatestProducts(data.data);
     }
     getProductsData(3);
   }, [])

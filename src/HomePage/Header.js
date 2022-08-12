@@ -41,9 +41,9 @@ const Header = (props) => {
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
-                            {navItems ? navItems.map((item) => (
+                            {navItems ? navItems.map((item, index) => (
                                 <li className={`nav-item ${location.pathname === item.address && "active"}`}
-                                    key={item.name}>
+                                    key={index}>
                                     <Link className="nav-link" to={`/${storeId}${item.address}`}>
                                         {item.name}<span className="sr-only">(current)</span>
                                     </Link>

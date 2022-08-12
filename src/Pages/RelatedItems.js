@@ -12,7 +12,7 @@ export default () => {
       const value = await getProducts(count);
       const data = await value.json();
       setIsLoading(false);
-      setItems(data);
+      setItems(data.data);
     }
     getItems(3);
   }, [])

@@ -29,7 +29,7 @@ const Product = () => {
                 return res.json();
             })
             .then(data => {
-                setItems(data);
+                setItems(data.data);
                 setIsLoading('success');
             })
             .catch(err => {
@@ -46,7 +46,7 @@ const Product = () => {
             const value = await getCategories(count);
             const data = await value.json();
             setIsLoadingCategory('success')
-            setCategories(data);
+            setCategories(data.data);
         }
         getCategoriesData(4);
     }, [])

@@ -22,7 +22,7 @@ const Category = () => {
                 return res.json();
             })
             .then(data => {
-                setCategories(data);
+                setCategories(data.data);
                 setIsLoading('success');
             })
             .catch(err => {
@@ -38,6 +38,8 @@ const Category = () => {
         return <div>{isLoading}</div>
     }
 
+    console.log(categories);
+
     return (
         <div className="product py-5 my-5 bg-light" id="products">
             <div className="container">
@@ -47,7 +49,7 @@ const Category = () => {
                 <div className="row mb-5">
                     {categories ? categories.map((category => (
                         <div className="col-md-4 mb-4 col-12" key={category.id}>
-                            <CustomCards cardImage={category.image} cardTitle={category.category} cardDesc={category.description} cardType={'Category'} itemLink={category.productLink} baseURL={`${storeId}/product/category/${category.category}`} key={category.id} />
+                            <CustomCards cardImage={category.image} cardTitle={category.category} cardDesc={category.description} cardType={'Category'} itemLink={`/${storeId}/product/category/${category.category}`} baseURL={`${storeId}/product/category/${category.category}`} key={category.id} />
                         </div>
                     ))) : <h2 className='w-100 text text-center mt-5'>No data found</h2>}
                 </div>
