@@ -1,9 +1,9 @@
 import React, { Suspense } from "react";
-import {Redirect, Route, Switch} from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Checkout from "../Pages/Checkout";
 import Loader from "../Components/Loader";
 import LoginForm from "../Pages/LoginForm";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 const About = React.lazy(() => import("../Pages/About")); // done
 const Cart = React.lazy(() => import("../Pages/Cart"));
 const Category = React.lazy(() => import("../Pages/Category")); // done
@@ -14,7 +14,7 @@ const MainContent = React.lazy(() => import("../HomePage/MainContent"));
 
 const AllRoutes = (props) => {
 
-    const storeId = useSelector(state => state.storeId.id);
+  const storeId = useSelector(state => state.storeId.id);
 
   return (
     <Suspense fallback={<Loader />}>
@@ -25,7 +25,7 @@ const AllRoutes = (props) => {
         <Route path={`/${storeId}/product/category/:category`} exact><Product /></Route>
         <Route path={`/${storeId}/product`} exact><Product /></Route>
         <Route path={`/${storeId}/product/:id`} exact><ProductDetail /></Route>
-        <Route path={`/${storeId}/home`}><MainContent /></Route>
+        <Route path={`/${storeId}/home`}><MainContent storeId={props.storeId} /></Route>
         <Route path={`/${storeId}/cart`}><Cart /></Route>
         <Route path={`/${storeId}/checkout`}><Checkout /></Route>
         <Route path={`/${storeId}/loginUser`}>{props.userLoginStatus ? <Redirect to={`/${storeId}/home`} /> : <LoginForm setLoginStatus={props.setUserLoginStatus} userLogin={true} />}</Route>

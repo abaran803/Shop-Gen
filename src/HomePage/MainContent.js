@@ -12,7 +12,7 @@ const ShopByCategory = React.lazy(() =>
   import("./MainPageContents/ShopByCategory")
 );
 
-const MainContent = () => {
+const MainContent = ({storeId}) => {
 
   const { features } = useSelector(state => state.siteData.data);
   const [categoryItems, setCategoryItems] = useState();
@@ -22,7 +22,7 @@ const MainContent = () => {
   useEffect(() => {
     const getCategoriesData = async (count) => {
       setIsLoading(true);
-      const value = await getCategories(count);
+      const value = await getCategories(count, storeId);
       const data = await value.json();
       setIsLoading(false);
       setCategoryItems(data.data);
@@ -30,13 +30,13 @@ const MainContent = () => {
     getCategoriesData(3);
     const getProductsData = async (count) => {
       setIsLoading(true);
-      const value = await getProducts(count);
+      const value = await getProducts(count, storeId);
       const data = await value.json();
       setIsLoading(false);
       setLatestProducts(data.data);
     }
     getProductsData(3);
-  }, [])
+  }, [storeId])
 
   const handleLoading = (loadingState) => {
     setIsLoading(loadingState);

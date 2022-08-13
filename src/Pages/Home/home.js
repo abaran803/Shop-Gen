@@ -14,7 +14,7 @@ const Home = () => {
 
     const gotoStore = (value) => {
         history.replace(`/${value}/home`);
-        window.location.reload(false);
+        // window.location.reload(false);
     }
 
     return (

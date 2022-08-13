@@ -128,12 +128,12 @@ const removeAllFromBackend = async item => {
     }
 }
 
-const getCategories = async (count) => {
+const getCategories = async (count, storeId) => {
     const categories = await fetch(`${URL}/getCategories/${storeId}/${count}`);
     return categories;
 }
 
-const getProducts = async (count) => {
+const getProducts = async (count, storeId) => {
     const products = await fetch(`${URL}/getProducts/${storeId}/${count}`);
     return products;
 }

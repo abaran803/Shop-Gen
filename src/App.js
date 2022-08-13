@@ -25,6 +25,7 @@ export default function App() {
 
     // Check if store exist
     useEffect(() => {
+        dispatch(updateKey(storeId))
         if (isStore) {
             setStoreStatus('verifying');
             fetch(`${process.env.REACT_APP_BACKEND_URL}/storeCheck/${storeId}`)
@@ -32,22 +33,19 @@ export default function App() {
                     if (!res.ok) {
                         throw Error("Server responds with error!");
                     }
+                    dispatch(getSiteData(storeId));
                     return res;
                 })
                 .then(() => {
-                    dispatch(updateKey(storeId))
                     return setStoreStatus('verified')
                 })
-                .catch(err => setStoreStatus('not exist'));
+                .catch(err => {
+                    setStoreStatus('not exist')
+                });
+        } else {
+            setStoreStatus('not exist');
         }
-    }, [])
-
-    // Getting site data if store exist
-    useEffect(() => {
-        if (isStore) {
-            dispatch(getSiteData(storeId));
-        }
-    }, [])
+    }, [storeId])
 
     // Function for user login
     const handleUserLoginStatus = (val) => {
@@ -85,10 +83,12 @@ export default function App() {
         </div>
     }
 
+    console.log(storeStatus);
+
     return (storeStatus === 'verified' ? (
         <div>
             <Header setUserLoginStatus={handleUserLoginStatus} />
-            <AllRoutes userLoginStatus={userLoggedInData} setUserLoginStatus={handleUserLoginStatus} />
+            <AllRoutes userLoginStatus={userLoggedInData} setUserLoginStatus={handleUserLoginStatus} storeId={storeId} />
             <Footer />
         </div>) : <StoreNotFound />);
 }
