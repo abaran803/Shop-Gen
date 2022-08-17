@@ -17,31 +17,33 @@ const Index = () => {
   let { path } = useRouteMatch();
 
   return (
-    <Box sx={{ height: '100vh' }} bgcolor='#e9ecef'>
+    <Box sx={{ width: '100vw', height: '100vh' }} bgcolor='#e9ecef'>
       <Stack direction='row' sx={{ height: '100%' }}>
         <Sidebar />
+        <Box flex={4}>
           <Navbar />
-        <Box flex={4} p={4}>
-          <Switch>
-            <Route exact path={`${path}/dashboard`}>
-              <MainContent />
-            </Route>
-            <Route exact path={`${path}/brand`}>
-              <Brand />
-            </Route>
-            <Route exact path={`${path}/`}>
-              <Redirect to={`${path}/dashboard`} />
-            </Route>
-            <Route exact path={`${path}/categories`}>
-              <CategoryPage />
-            </Route>
-            <Route exact path={`${path}/static`}>
-              <StaticPage />
-            </Route>
-            <Route exact path={`${path}/products`}>
-              <ProductPage />
-            </Route>
-          </Switch>
+          <Box p={3}>
+            <Switch>
+              <Route exact path={`${path}/dashboard`}>
+                <MainContent />
+              </Route>
+              <Route exact path={`${path}/brand`}>
+                <Brand />
+              </Route>
+              <Route exact path={`${path}/`}>
+                <Redirect to={`${path}/dashboard`} />
+              </Route>
+              <Route exact path={`${path}/categories`}>
+                <CategoryPage />
+              </Route>
+              <Route exact path={`${path}/static`}>
+                <StaticPage />
+              </Route>
+              <Route exact path={`${path}/products`}>
+                <ProductPage />
+              </Route>
+            </Switch>
+          </Box>
         </Box>
       </Stack>
     </Box>

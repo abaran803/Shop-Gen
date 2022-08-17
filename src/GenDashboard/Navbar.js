@@ -156,14 +156,14 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ bgcolor: {xs: 'primary', sm: 'transparent'}, color: {xs: 'white', sm: 'black'}, boxShadow: 'none'}}>
         <Toolbar>
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ mr: 2 }}
+            sx={{ mr: 2, display: {xs: 'inherit', sm: 'none'}  }}
           >
             <MenuIcon />
           </IconButton>
@@ -173,9 +173,10 @@ export default function Navbar() {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            Admin
           </Typography>
-          <Search>
+          <Box sx={{ flexGrow: 1 }} />
+          <Search sx={{bgcolor: 'background.paper', color: 'black'}}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
