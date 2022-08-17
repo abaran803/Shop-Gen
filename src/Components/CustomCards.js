@@ -1,6 +1,13 @@
 import React from 'react';
 import { Fragment } from 'react';
 import { Link } from "react-router-dom";
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { CardMedia } from '@mui/material';
 
 const CustomCards = ({ cardImage, cardTitle, cardDesc, cardType, cardPrice, itemLink, baseURL }) => {
     return (
@@ -55,4 +62,32 @@ const CustomCards = ({ cardImage, cardTitle, cardDesc, cardType, cardPrice, item
     )
 }
 
-export default CustomCards
+const CustomCardsMaterial = ({ cardImage, cardTitle, cardDesc, cardType, cardPrice, itemLink, baseURL }) => {
+    return (
+        <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <CardMedia
+                component="img"
+                height="140"
+                image={cardImage}
+                alt="green iguana"
+                sx={{ borderBottom: '1px solid grey', minHeight: '280px', transform: 'scale(0.9)' }}
+            />
+            <CardContent sx={{height: '100%'}}>
+                <Typography gutterBottom component="div" sx={{fontWeight: '600', fontSize: '1.5rem', lineHeight: '1.2'}}>
+                    {cardTitle.substring(0, 28) + ((cardTitle.length > 15) ? '...' : '')}
+                </Typography>
+                {cardDesc && <Typography variant="body2" color="text.secondary">
+                    {cardDesc}
+                </Typography>}
+            </CardContent>
+            {cardPrice && <CardActions>
+                <Link to={`/${baseURL}`}>
+                    <Button size="small">Visit</Button>
+                </Link>
+                <Button size="small" sx={{color: 'black'}}>Price: {cardPrice}$</Button>
+            </CardActions>}
+        </Card>
+    )
+}
+
+export default CustomCardsMaterial
