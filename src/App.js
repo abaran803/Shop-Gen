@@ -4,7 +4,7 @@ import Footer from "./HomePage/Footer";
 import Header from "./HomePage/Header";
 import { useDispatch } from "react-redux";
 import { getSiteData, updateKey } from "./ReduxComponents/CounterSlice";
-import { useLocation } from "react-router-dom";
+import { Route, useLocation } from "react-router-dom";
 import StoreNotFound from "./Pages/ErrorPages/StoreNotFound";
 import Loader from "./Components/Loader";
 import Home from "./Pages/Home/home";
@@ -12,6 +12,8 @@ import ShopGenerator from "./Components/ShopGenerator";
 import GenerateSuccess from "./Components/GenerateSuccess";
 import { Types } from "mongoose";
 import SampleShop from "./Data/SampleShop";
+import Index from "./GenDashboard/Index";
+import { Switch } from "react-router-dom";
 
 export default function App() {
     const dispatch = useDispatch();
@@ -72,6 +74,12 @@ export default function App() {
 
     if(URL.pathname === '/sample') {
         return <SampleShop />
+    }
+
+    if(URL.pathname.includes('/generate/UI')) {
+        return (<Switch>
+            <Route path='/generate/UI'><Index /></Route>
+        </Switch>)
     }
 
     if (storeStatus === "verifying") {
