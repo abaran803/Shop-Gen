@@ -41,7 +41,7 @@ const Category = () => {
     console.log(categories);
 
     return (
-        <div className="product py-5 my-5 bg-light" id="products">
+        <div className="product py-5 bg-light" id="products">
             <div className="container">
                 <div className="section_title text-center mb-5">
                     <h1 className="text-capitalize">Categories</h1>
