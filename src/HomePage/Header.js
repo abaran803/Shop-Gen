@@ -108,7 +108,7 @@ const HeaderMaterial = (props) => {
 
     return (
         <div>
-            <AppBar position="sticky">
+            <AppBar position="sticky" sx={{bgcolor: {xs: 'primary', sm: 'background.paper'}}}>
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -120,13 +120,15 @@ const HeaderMaterial = (props) => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h5" mr={3}>
+                    <Typography variant="h5" mr={3} sx={{color: {xs: 'white',sm: 'black'}}}>
                         {brandName}
                     </Typography>
                     {navItems && navItems.map((item, index) => (
-                        <Typography key={index} variant='body' sx={{ cursor: 'pointer', display: { xs: 'none', sm: '' } }} component='div' mx={1}>
-                            <Link className="nav-link text-white" to={`/${storeId}${item.address}`}>
+                        <Typography key={index} variant='button' component="div" sx={{ cursor: 'pointer', display: { xs: 'none', sm: 'block' } }} component='div' mx={1}>
+                            <Link className="nav-link" to={`/${storeId}${item.address}`}>
+                                <Box sx={{color: {xs: 'white',sm: 'black'}}}>
                                 {item.name}<span className="sr-only">(current)</span>
+                                </Box>
                             </Link>
                         </Typography>
                     ))}
