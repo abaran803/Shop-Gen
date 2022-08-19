@@ -1,2 +1,0 @@
-(this["webpackJsonpshop-gen"]=this["webpackJsonpshop-gen"]||[]).push([[12],{240:function(s,n,t){"use strict";t.r(n);var e=t(0);n.default=function(){return Object(e.jsx)("div",{children:"This is Contact Page"})}}}]);
-//# sourceMappingURL=12.122ecc60.chunk.js.map
