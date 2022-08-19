@@ -1,11 +1,11 @@
-import {useDispatch, useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import RelatedItems from "./RelatedItems";
-import {addNewCartItem} from "../ReduxComponents/CounterSlice";
-import {useEffect, useState} from "react";
-import {getProductDetails} from "../API/api";
+import { addNewCartItem } from "../ReduxComponents/CounterSlice";
+import { useEffect, useState } from "react";
+import { getProductDetails } from "../API/api";
 import Loader from "../Components/Loader";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const ProductDetail = (props) => {
     const history = useHistory();
@@ -16,31 +16,24 @@ const ProductDetail = (props) => {
     const dispatch = useDispatch();
     const pageId = useParams();
     const storeId = useSelector(state => state.storeId.id);
-    useEffect(() => {
+    useEffect(async () => {
         const id = pageId.id;
         setIsLoading('loading');
         const url = process.env.REACT_APP_BACKEND_URL;
-        fetch(`${url}/getProductDetails/${storeId}/${id}`)
-            .then(res => {
-                if (!res.ok) {
-                    throw Error("Product not Found");
-                }
-                return res.json();
-            })
-            .then(data => {
-                setItem(data.data);
-                setIsLoading('success');
-            })
-            .catch(err => {
-                setIsLoading(err.message)
-            })
+        try {
+            const data = await getProductDetails(storeId, id);
+            setItem(data);
+            setIsLoading('success');
+        } catch (err) {
+            setIsLoading(err.message)
+        }
     }, [])
     // const ind = (items ? items.findIndex((item) => item.id === pageId.id) : -1);
     // if (ind === -1) {
     //   return <div>Item not found</div>;
     // }
     if (isLoading === 'loading' || isLoading === 'idle') {
-        return <Loader/>
+        return <Loader />
     }
 
     if (isLoading !== 'success') {
@@ -97,7 +90,7 @@ const ProductDetail = (props) => {
                                                     src={selectedItem.image}
                                                     className="d-block img img-fluid rounded"
                                                     alt=""
-                                                    style={{width: "50px !important"}}
+                                                    style={{ width: "50px !important" }}
                                                 />
                                             </li>
                                             <li
@@ -129,7 +122,7 @@ const ProductDetail = (props) => {
                                                     src={selectedItem.image}
                                                     className="d-block img img-fluid rounded m-auto"
                                                     width='100%'
-                                                    style={{maxWidth: "360px", maxHeight: "500px"}}
+                                                    style={{ maxWidth: "360px", maxHeight: "500px" }}
                                                     alt="..."
                                                 />
                                             </div>
@@ -159,9 +152,9 @@ const ProductDetail = (props) => {
                                         <h3>{selectedItem.title}</h3>
                                     </div>
                                     <div className="category mb-4">
-                    <span className="bg-light-gray p-2">
-                      <a href="category.html">SHIRT</a>
-                    </span>
+                                        <span className="bg-light-gray p-2">
+                                            <a href="category.html">SHIRT</a>
+                                        </span>
                                     </div>
                                     <div className="rating d-flex text-danger mb-4">
                                         {/* {
@@ -211,7 +204,7 @@ const ProductDetail = (props) => {
                     </div>
                 </div>
             </div>
-            <RelatedItems/>
+            <RelatedItems />
         </div>
     );
 };

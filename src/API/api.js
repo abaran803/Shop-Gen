@@ -1,5 +1,5 @@
-import {store} from "../ReduxComponents/store";
-import {fetchData} from "../ReduxComponents/CounterSlice";
+import { store } from "../ReduxComponents/store";
+import { fetchData } from "../ReduxComponents/CounterSlice";
 
 // const URL = 'http://localhost:8080'
 const URL = process.env.REACT_APP_BACKEND_URL
@@ -8,7 +8,7 @@ const storeId = window.location.hash.substring(2).split('/')[0];
 const userData = JSON.parse(localStorage.getItem('userData'));
 
 export const fetchFromBackend = () => async dispatch => {
-    const {storeId} = store.getState();
+    const { storeId } = store.getState();
     console.log(storeId);
     try {
         const res = await fetch(URL + `/gets-items/${storeId}/${'userId'}`);
@@ -16,9 +16,9 @@ export const fetchFromBackend = () => async dispatch => {
             throw new Error("Error Occured");
         }
         const data = await res.json();
-        dispatch(fetchData({value: data, length: data.length}));
+        dispatch(fetchData({ value: data, length: data.length }));
     } catch (err) {
-        dispatch(fetchData({value: [], length: 0}));
+        dispatch(fetchData({ value: [], length: 0 }));
     }
 }
 
@@ -71,7 +71,7 @@ const fetchCartFromBackend = async () => {
 
 const addNewItemToBackend = async item => {
     try {
-        const selectedItem = {...item, storeId, userId: userData["_id"]};
+        const selectedItem = { ...item, storeId, userId: userData["_id"] };
         const response = await fetch(URL + "/add-new", {
             method: 'POST',
             headers: {
@@ -90,7 +90,7 @@ const addNewItemToBackend = async item => {
 
 const removeOneFromBackend = async item => {
     try {
-        const selectedItem = {...item, storeId, userId: userData["_id"]};
+        const selectedItem = { ...item, storeId, userId: userData["_id"] };
         const response = await fetch(URL + "/remove-one", {
             method: 'POST',
             headers: {
@@ -103,14 +103,14 @@ const removeOneFromBackend = async item => {
         }
         return await response.json();
     } catch
-        (err) {
+    (err) {
         return false;
     }
 }
 
 const removeAllFromBackend = async item => {
     try {
-        const selectedItem = {...item, storeId, userId: userData["_id"]};
+        const selectedItem = { ...item, storeId, userId: userData["_id"] };
         const response = await fetch(URL + "/remove-all", {
             method: 'POST',
             headers: {
@@ -123,24 +123,36 @@ const removeAllFromBackend = async item => {
         }
         return await response.json();
     } catch
-        (err) {
+    (err) {
         return false;
     }
 }
 
 const getCategories = async (count, storeId) => {
     const categories = await fetch(`${URL}/getCategories/${storeId}/${count}`);
-    return categories;
+    if (!categories.ok) {
+        throw new Error('Categories not Found');
+    }
+    const { data } = await categories.json();
+    return data;
 }
 
 const getProducts = async (count, storeId) => {
     const products = await fetch(`${URL}/getProducts/${storeId}/${count}`);
-    return products;
+    if (!products.ok) {
+        throw new Error("Products not found");
+    }
+    const { data } = await products.json();
+    return data;
 }
 
-const getProductDetails = async (id) => {
+const getProductDetails = async (storeId, id) => {
     const product = await fetch(`${URL}/getProductDetails/${storeId}/${id}`)
-    return product;
+    if (!product.ok) {
+        throw new Error('Product not Found');
+    }
+    const { data } = await product.json();
+    return data;
 }
 
 const getItemsByCategory = async (category) => {
@@ -192,7 +204,7 @@ const registerUser = async (userData) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({...userData, storeId})
+            body: JSON.stringify({ ...userData, storeId })
         });
         if (!response.ok) {
             throw new Error("Something went wrong");
@@ -222,6 +234,21 @@ const loginUser = async (userData) => {
     }
 }
 
+const shopGenerator = async (data) => {
+    const response = await fetch(URL + '/generateStore', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    if(!response.ok) {
+        throw new Error('Unable to create Shop!!!');
+    }
+    const res = await response.json();
+    return res;
+}
+
 export {
     storeCheck,
     getSiteDataFromBackend,
@@ -236,5 +263,6 @@ export {
     registerOwner,
     loginOwner,
     registerUser,
-    loginUser
+    loginUser,
+    shopGenerator
 }

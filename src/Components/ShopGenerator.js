@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import { shopGenerator } from '../API/api';
 import Loader from './Loader';
 
 const ShopGenerator = () => {
@@ -21,23 +22,21 @@ const ShopGenerator = () => {
     const data = JSON.parse(storeData);
     const { brandName, email } = data;
     e.preventDefault();
-    const response = await fetch(URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    });
-    const jsonResponse = await response.json();
-    history.replace({
-      pathname: '/generateSuccess',
-      state: {
-        storeAdded: true,
-        brandName,
-        email,
-        storeId: jsonResponse.storeId
-      }
-    });
+    try {
+      const jsonResponse = await shopGenerator(data);
+      history.replace({
+        pathname: '/generateSuccess',
+        state: {
+          storeAdded: true,
+          brandName,
+          email,
+          storeId: jsonResponse.storeId
+        }
+      });
+    } catch (err) {
+      alert(err.message);
+      history.replace('/generate');
+    }
   }
 
   const inputDataMethods = [
