@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getCategories } from "../API/api";
 import CustomCards from "../Components/CustomCards";
 import Loader from "../Components/Loader";
 
@@ -10,24 +11,17 @@ const Category = () => {
     const [categories, setCategories] = useState();
     const [isLoading, setIsLoading] = useState('idle');
 
-    useEffect(() => {
+    useEffect(async () => {
         setIsLoading('loading');
         const count = 4;
         const url = process.env.REACT_APP_BACKEND_URL;
-        fetch(`${url}/getCategories/${storeId}/${count}`)
-            .then(res => {
-                if(!res.ok) {
-                    throw Error("Categories not Found");
-                }
-                return res.json();
-            })
-            .then(data => {
-                setCategories(data.data);
-                setIsLoading('success');
-            })
-            .catch(err => {
-                setIsLoading(err.message)
-            })
+        try {
+            const data = await getCategories(count, storeId);
+            setCategories(data);
+            setIsLoading('success');
+        } catch(err) {
+            setIsLoading(err.message)
+        }
     }, [])
 
     if(isLoading === 'loading' || isLoading === 'idle') {

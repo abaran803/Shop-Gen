@@ -22,18 +22,16 @@ const MainContent = ({storeId}) => {
   useEffect(() => {
     const getCategoriesData = async (count) => {
       setIsLoading(true);
-      const value = await getCategories(count, storeId);
-      const data = await value.json();
+      const data = await getCategories(count, storeId);
       setIsLoading(false);
-      setCategoryItems(data.data);
+      setCategoryItems(data);
     }
     getCategoriesData(3);
     const getProductsData = async (count) => {
       setIsLoading(true);
-      const value = await getProducts(count, storeId);
-      const data = await value.json();
+      const data = await getProducts(count, storeId);
       setIsLoading(false);
-      setLatestProducts(data.data);
+      setLatestProducts(data);
     }
     getProductsData(3);
   }, [storeId])

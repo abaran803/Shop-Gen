@@ -44,10 +44,9 @@ const Product = () => {
     useEffect(() => {
         const getCategoriesData = async (count) => {
             setIsLoadingCategory('loading');
-            const value = await getCategories(count, storeId);
-            const data = await value.json();
+            const data = await getCategories(count, storeId);
             setIsLoadingCategory('success')
-            setCategories(data.data);
+            setCategories(data);
         }
         getCategoriesData(4);
     }, [])
