@@ -16,8 +16,8 @@ const CustomFilter = ({ setShowFilter, showFilter, categories, storeId, rangeVal
                     <b>Category</b>
                 </label>
                 <ul className="list-group">
-                    {categories ? categories.map(category => (
-                        <li className="list-group-item" key={category.id}>
+                    {categories ? categories.map((category, index) => (
+                        <li className="list-group-item" key={index}>
                             <Link
                                 to={`/${storeId}/product/category/${category.category}`}>{category.category}</Link>
                         </li>
@@ -53,10 +53,10 @@ const CustomFilter = ({ setShowFilter, showFilter, categories, storeId, rangeVal
 const CustomFilterMaterial = ({ setShowFilter, showFilter, categories, storeId, rangeValue, changeHandler }) => {
     return (
         <React.Fragment>
-            <h4 className="mb-5 border-bottom d-flex justify-content-between">
+            <div className="mb-5 border-bottom d-flex justify-content-between">
                 <Typography variant='h4'>Filters</Typography>
                 <div className="bg bg-secondary m-1 p-1 rounded text-white d-flex align-items-center" onClick={() => setShowFilter(value => !value)} style={{ fontSize: "0.9rem", cursor: "pointer" }}>{showFilter ? 'Hide' : 'Show'}</div>
-            </h4>
+            </div>
             <div className={`mb-5 ${!showFilter ? 'd-none' : ''}`}>
                 <label>
                     <Typography variant='h5'>Category</Typography>
