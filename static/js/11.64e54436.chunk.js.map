@@ -1,0 +1,1 @@
+{"version":3,"sources":["Pages/About.js"],"names":["About"],"mappings":"+HAMeA,UAND,WACV,OACI","file":"static/js/11.64e54436.chunk.js","sourcesContent":["const About = () => {\r\n    return (\r\n        <div>This is About Page</div>\r\n    )\r\n}\r\n\r\nexport default About;"],"sourceRoot":""}
