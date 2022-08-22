@@ -116,6 +116,15 @@ To deploy this project run
 
 ```
 
+```bash
+  // Run this command only once
+  npm run predeploy
+```
+
+```bash
+  npm run deploy
+```
+
 
 ## Tech Stack
 
