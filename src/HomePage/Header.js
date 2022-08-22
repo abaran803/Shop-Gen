@@ -6,6 +6,7 @@ import { AppBar, IconButton, Toolbar, Typography, Box, Button, Menu, MenuItem, D
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from "react";
 import ListItem from '@mui/material/ListItem';
+import AddReactionIcon from '@mui/icons-material/AddReaction';
 
 const Header = (props) => {
 
@@ -72,6 +73,7 @@ const HeaderMaterial = (props) => {
     const { brandName, navItems } = useSelector(state => state.siteData.data)
     const storeId = useSelector(state => state.storeId.id);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -84,6 +86,14 @@ const HeaderMaterial = (props) => {
         props.setUserLoginStatus(false);
     }
 
+    window.addEventListener('scroll', function () {
+        if (window.pageYOffset >= 100) {
+            setIsScrolled(true);
+        } else {
+            setIsScrolled(false);
+        }
+    })
+
     const loginUserData = JSON.parse(localStorage.getItem('userData'));
 
     const drawer = (
@@ -93,8 +103,8 @@ const HeaderMaterial = (props) => {
             </Typography>
             <Divider />
             <List>
-                {navItems ? navItems.map((item) => (
-                    <Link className="nav-link text-dark" to={`/${storeId}${item.address}`}>
+                {navItems ? navItems.map((item, id) => (
+                    <Link key={id} className="nav-link text-dark" to={`/${storeId}${item.address}`}>
                         <ListItem key={item.name} disablePadding>
                             <ListItemButton sx={{ textAlign: 'center' }}>
                                 <ListItemText primary={item.name} />
@@ -107,8 +117,8 @@ const HeaderMaterial = (props) => {
     );
 
     return (
-        <div>
-            <AppBar position="sticky" sx={{bgcolor: {xs: 'primary', sm: 'background.paper'}}}>
+        <div style={{ position: 'sticky', top: '0', zIndex: '99999' }}>
+            <AppBar position="sticky" sx={{ bgcolor: { xs: 'primary', sm: (isScrolled ? 'background.paper' : 'primary') } }}>
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -120,20 +130,22 @@ const HeaderMaterial = (props) => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h5" mr={3} sx={{color: {xs: 'white',sm: 'black'}}}>
-                        {brandName}
+                    <Typography variant="h5" mr={3} sx={{ color: { xs: 'white', sm: (isScrolled ? 'black' : 'white') } }}>
+                        <Link to={`/${storeId}/home`} style={{textDecoration: 'none', color: 'inherit'}}>
+                            {brandName}
+                        </Link>
                     </Typography>
                     {navItems && navItems.map((item, index) => (
                         <Typography key={index} variant='button' component="div" sx={{ cursor: 'pointer', display: { xs: 'none', sm: 'block' } }} component='div' mx={1}>
                             <Link className="nav-link" to={`/${storeId}${item.address}`}>
-                                <Box sx={{color: {xs: 'white',sm: 'black'}}}>
-                                {item.name}<span className="sr-only">(current)</span>
+                                <Box sx={{ color: { xs: 'white', sm: (isScrolled ? 'black' : 'white') } }}>
+                                    {item.name}<span className="sr-only">(current)</span>
                                 </Box>
                             </Link>
                         </Typography>
                     ))}
                     <Box sx={{ marginLeft: 'auto' }}>
-                        <Button variant="contained" color="success">Login</Button>
+                        <Box sx={{ color: { xs: 'white', sm: (isScrolled ? 'black' : 'white') }, cursor: 'pointer' }} onClick={loginUserData ? handleLogOut : handleLogin}>{<AddReactionIcon />}</Box>
                     </Box>
                 </Toolbar>
             </AppBar>
