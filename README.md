@@ -141,7 +141,7 @@ To deploy this project run
 - Original image upload, intead of just a link
 ## Related
 
-Here are backend of this project
+Here is the backend of this project
 
 [E-Commerce Backend](https://github.com/abaran803/E-Commerce-Backend)
 
