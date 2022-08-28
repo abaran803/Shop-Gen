@@ -4,6 +4,7 @@ import Checkout from "../Pages/Checkout";
 import Loader from "../Components/Loader";
 import LoginForm from "../Pages/LoginForm";
 import { useSelector } from "react-redux";
+import SignUpForm from "../Pages/SignUpForm";
 const About = React.lazy(() => import("../Pages/About")); // done
 const Cart = React.lazy(() => import("../Pages/Cart"));
 const Category = React.lazy(() => import("../Pages/Category")); // done
@@ -29,6 +30,7 @@ const AllRoutes = (props) => {
         <Route path={`/${storeId}/cart`}><Cart /></Route>
         <Route path={`/${storeId}/checkout`}><Checkout /></Route>
         <Route path={`/${storeId}/loginUser`}>{props.userLoginStatus ? <Redirect to={`/${storeId}/home`} /> : <LoginForm setLoginStatus={props.setUserLoginStatus} userLogin={true} />}</Route>
+        <Route path={`/${storeId}/signupUser`}>{props.userLoginStatus ? <Redirect to={`/${storeId}/home`} /> : <SignUpForm setLoginStatus={props.setUserLoginStatus} />}</Route>
         <Route path={`/${storeId}/`} exact><Redirect to={`/${storeId}/home`} /></Route>
       </Switch>
     </Suspense>

@@ -11,20 +11,24 @@ const SignUpForm = (props) => {
     const [userName, setUserName] = useState("");
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
-    const ownerData = JSON.parse(localStorage.getItem('ownerData'));
     const storeId = useSelector(state => state.storeId.id);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = await (props.userLogin ? registerUser({ userName, mail, password }) : registerOwner({ userName, mail, password }));
-        if (!data) {
-            setSignupError(true);
-            return "Data not Found, some error occured";
+        try {
+            const data = await registerUser({ userName, mail, password });
+            if (!data.ok) {
+                setSignupError(true);
+                console.log("Data not Found, some error occured");
+                throw new Error("Data not Found, some error occured");
+            }
+            history.push({
+                pathname: `/${storeId}/loginUser`,
+                state: { status: 'Signed Up Successfully!!! Login Here' }
+            })
+        } catch(e) {
+            return (e.message)
         }
-        history.push({
-            pathname: props.userLogin ? `/${storeId}/loginUser` : "/login",
-            state: { status: props.userLogin ? 'Signed Up Successfully!!! Login Here' : 'Shop Account Created Successfully!!! Go to Store' }
-        });
     }
 
     return (
@@ -48,7 +52,7 @@ const SignUpForm = (props) => {
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control" id="exampleInputPassword1" placeholder="Password" />
             </div>
             <button type="submit" className="btn btn-primary">Sign Up</button>
-            <div className='mt-2' style={{ fontSize: "0.8rem" }}>Already a member! <Link to={props.userLogin ? `/${storeId}/loginUser` : "/login"}>Login</Link></div>
+            <div className='mt-2' style={{ fontSize: "0.8rem" }}>Already a member! <Link to={`/${storeId}/loginUser`}>Login</Link></div>
         </form>
     )
 }

@@ -198,21 +198,14 @@ const loginOwner = async (ownerData) => {
 }
 
 const registerUser = async (userData) => {
-    try {
-        const response = await fetch(URL + "/registerUser", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ ...userData, storeId })
-        });
-        if (!response.ok) {
-            throw new Error("Something went wrong");
-        }
-        return true;
-    } catch (err) {
-        return false;
-    }
+    const response = await fetch(URL + "/registerUser", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ ...userData, storeId })
+    });
+    return response;
 }
 
 const loginUser = async (userData) => {
@@ -242,7 +235,7 @@ const shopGenerator = async (data) => {
         },
         body: JSON.stringify(data)
     });
-    if(!response.ok) {
+    if (!response.ok) {
         throw new Error('Unable to create Shop!!!');
     }
     const res = await response.json();
